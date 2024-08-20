@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    table, tr{
+      border: 1px solid red;
+    }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <!-- 제목부터 시작 -->
+   <h1>인사합니다.</h1>
+   <p>반갑습니다. 저는 유원상입니다. 잘 부탁드립니다!</p>
+   <hr>
+   <p>좋아하는 것</p>
+   <ul>
+    <li><b>맛집</b>탐방</li>
+    <li><i>게임</i>제작</li>
+    <li>게임하기</li>
+   </ul>
+   <p>싫어하는 것</p>
+   <ul>
+    <li>거짓말</li>
+    <li>지겨운 것</li>
+   </ul>
+   <hr>
+   <h2>공부리스트</h2>
+   <table>
+    <tr>
+      <th>수학</th>
+      <th>markup</th>
+      <td>php</td>
+    </tr>
+    <tr>
+      <td>중</td>
+      <td>중</td>
+      <td>하</td>
+    </tr>
+   </table>
+   <hr>
+   <form action="">
+    <fieldset>
+      <legend>문의사항은 이쪽으로 보내주세요!</legend>
+      <label for="name">
+        문의자 이름
+      </label>
+      <input type="text" name="name" id="name" required placeholder="반드시 이름과 패스워드 입력" minlength="2" maxlength="5">
+      <br>
+      <label for="pw">비밀번호</label>
+      <input type="password" name="pw" id="pw" required>
+      <fieldset>
+        <legend>문의사항의 대주제를 정해주세요</legend>
+        <input type="checkbox" name="fight" id="fight"><label for="fight">게임대결</label><br>
+        <input type="checkbox" name="wonder" id="wonder"><label for="wonder">고민상담</label><br>
+        <input type="checkbox" name="question" id="question"><label for="question">문제제시</label>
+      </fieldset>
+      <label for="memo">문의사항 내용 작성해주세요</label><br>
+      <textarea name="memo" id="memo"></textarea>      
+    </fieldset>
+    <fieldset>
+      <legend>메시지를 수령하시겠습니까?</legend>
+      <input type="radio" name="sendMassage" id="sendYes"><label for="sendYes">수령</label>
+      <input type="radio" name="sendMassage" id="sendNo"><label for="sendNo">수령하지 아니함</label>
+    </fieldset>
+    <button type="submit">제출하기</button><br>
+    <button type="reset">초기화하기</button><br>
+    <button type="button">입력취소 및 나가기</button>
+   </form>
+</body>
+</html>
