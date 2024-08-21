@@ -1,0 +1,34 @@
+*{
+  padding: 10px;
+  margin: 10px;
+}
+.h2_color{
+  color: hsla(0, 100%, 50%, 1);
+}
+.td_none{
+  text-decoration: none;
+}
+.td_underline{
+  text-decoration: underline;
+}
+.td_through{
+  text-decoration: line-through;
+}
+
+.aline_left{
+  text-align: center;
+}
+.transform{
+  text-transform: lowercase;
+}
+.latter_spacing{
+  letter-spacing: 10px;
+}
+.word_spacing{
+  word-spacing: 20px;
+}
+
+.shadow{
+  /* 가로위치, 세로위치, 그림자 크기, 색상 */
+  text-shadow: 2px 2px 1px #ffd7d7;
+}

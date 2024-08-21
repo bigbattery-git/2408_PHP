@@ -1,0 +1,21 @@
+*{
+  color: black;
+  padding: 0;
+  margin: 0;
+}
+#leftinfo{
+  float:left
+}
+#rightinfo{
+  float:right;
+}
+
+footer{
+  vertical-align: bottom;
+  background-color: #eeeee4;
+}
+section{
+  margin:auto;
+  vertical-align: middle;
+  text-align: center;
+}

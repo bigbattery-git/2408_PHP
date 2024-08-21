@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  color: black;
+}
+
+.p_size_xx_small{
+  font-size: xx-small;
+}
+
+.p_size_midium{
+  font-size: medium;
+}
+
+.p_size_xx_large{
+  font-size: xx-large;
+}
+
+.p_size_px{
+  font-size: 36px;
+}
+
+.p_size_em{
+  font-size: 2em;
+}
+
+.p_size_rem{
+  font-size: 2rem;
+}
+
+.p_welght_100{
+  font-weight: 100;
+}
+
+.p_welght_400{
+  font-weight: 400;
+}
+
+.p_welght_900{
+  font-weight: 900;
+}
+
+body{
+  font-family: "Nanum Pen Script", "돋움", "굴림";
+  font-style: normal;
+  font-weight: 400;
+}

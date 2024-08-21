@@ -1,0 +1,27 @@
+*{
+  color : black;
+  margin: 0;
+  padding: 0;
+}
+
+#test1{
+  color:skyblue;
+}
+
+/* -------------------------------------------------- */
+
+#test-h2{
+  color : aqua
+}
+
+.class-h2{
+  color: blue;
+}
+
+h2{
+  color : orange
+}
+
+h2{
+  color: red;
+}
