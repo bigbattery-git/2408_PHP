@@ -1,0 +1,44 @@
+header{
+  background-color: rgba(0,0,0, 0.7);
+}
+
+h1{
+  color: white;
+  padding-left: 40px;
+}
+
+h2{
+  color: #ff0000;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+p{
+  font-size: 1.2em;
+  line-height: 2em;
+  font-weight: 900;
+  text-align: center;
+}
+
+.accent{
+  color : #0000ff;
+}
+
+.smalltext{
+  font-size: 0.7em;
+}
+
+.h1-explain{
+  color: orange;
+  font-weight: 400;
+  text-align: left;
+  padding : 30px;
+}
+.alrat{
+  background-color: black;
+  color: white;
+  text-align: left;
+}
+.alrat-span{
+  padding-left: 20px;
+}
