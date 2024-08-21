@@ -1,0 +1,17 @@
+*{
+  margin: 0;
+  padding: 30;
+  color: skyblue;
+}
+
+h1{
+  color : red;
+}
+
+.font-color{
+  color : orange;
+}
+
+#strong-black{
+  color : black;
+}
