@@ -15,6 +15,8 @@
   text-decoration: line-through;
 }
 
+
+
 .aline_left{
   text-align: center;
 }
@@ -26,6 +28,11 @@
 }
 .word_spacing{
   word-spacing: 20px;
+}
+
+.line-height{
+  line-height: 2.0;
+  line-height: 200%;
 }
 
 .shadow{
