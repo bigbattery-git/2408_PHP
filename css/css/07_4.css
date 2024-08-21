@@ -1,0 +1,9 @@
+.foods1{
+  list-style-type: disc;
+}
+.foods2{
+  list-style-position: inside;
+}
+.foods3{
+  list-style-image: url("../img/icon_hospital.png");
+}

@@ -1,21 +1,33 @@
 *{
-  color: black;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 #leftinfo{
-  float:left
+  float: left;
 }
 #rightinfo{
-  float:right;
+  float: right;
 }
 
 footer{
-  vertical-align: bottom;
-  background-color: #eeeee4;
+  background-color:#f2f2f2; 
 }
-section{
-  margin:auto;
-  vertical-align: middle;
+
+#searchButton{
   text-align: center;
+}
+
+#search{
+  text-align: center;
+}
+
+#logo{
+  text-align: center;
+}
+
+.footer_info_left{
+  text-align: left;
+}
+.footer_info_right{
+  text-align: right;
 }
