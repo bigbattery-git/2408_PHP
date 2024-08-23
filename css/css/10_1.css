@@ -1,0 +1,15 @@
+header span{
+  color : red;
+}
+
+header > span{
+  color: blue;
+}
+
+header + span{
+  color : green;
+}
+
+header ~ span{
+  color: violet;
+}

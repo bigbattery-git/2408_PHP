@@ -1,0 +1,16 @@
+div{
+  width : 200px;
+  height: 150px;
+  border: 1px solid black;
+  margin: 20px;
+  text-align: center;
+  line-height: 75px;
+  color : white
+}
+
+.div1{
+  background: linear-gradient(230deg, blue 60%, skyblue, white);
+}
+.div2{
+  background: radial-gradient(circle at 0% ,blue, skyblue, white);
+}

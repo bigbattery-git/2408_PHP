@@ -1,0 +1,59 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body{
+  background-color: black;
+}
+
+h1{
+  background-color: rgb(5, 64, 65);
+  color : white;
+  text-align: center;
+
+  margin : 30px 20px 20px 20px;
+  padding : 30px 0px;
+}
+
+h2{
+  color: red;
+  margin : 30px 0px;
+}
+
+ul{
+  list-style-type: none;
+}
+
+li{
+  margin: 10px 50px;
+}
+
+.main{
+  margin-left: 20px;
+}
+
+.container{
+  width: 657px;
+  height: 930px;
+
+  border-style: dotted;
+  border-width: 1px;
+
+  margin: 10px auto;
+
+  background-color: white;
+  background-image: url("../img/camera_setting_settings.jpg");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+
+.title_discript{
+  font-size: 24px;
+  text-align: center;
+  font-weight: 900;
+
+  margin-bottom: 30px;
+  margin-top : 20px
+}
+

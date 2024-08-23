@@ -1,0 +1,27 @@
+[target]{
+  color: green;
+}
+
+[target=_blank]{
+  color: blue;
+}
+
+[class ~= att_class]{
+  color : red;
+}
+
+[class |= att]{
+  color : chocolate;
+}
+
+[class ^= co]{
+  color :skyblue;
+}
+
+[class $= na]{
+  color :yellow;
+}
+
+[class *= ok]{
+  color : black;
+}

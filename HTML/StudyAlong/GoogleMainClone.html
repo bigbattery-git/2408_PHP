@@ -9,61 +9,29 @@
 <body>
   <header>
     <nav>
-      <ul>
-        <span id="leftinfo">
-          <ui><a href="#">Google 정보</a></a></ui>
-          <ui><a href="#">스토어</a></ui>
-        </span>
-        <span id="rightinfo">
-          <ui><a href="#">Gmail</a></ui>
-          <ui><a href="#">이미지</a></ui>
-          <ui><a href="#"><img src="../img/Google_apps.png" alt="Google 앱" title="Google 앱"></a></ui>
-          <ui><a href="#"><img src="" alt="">로그인</a></ui>
-        </span>
-      </ul>
+      <div>
+        <a href="#">Google 정보</a>
+        <a href="#">스토어</a>
+      </div>
+      <div>
+        <a href="#">Gmail</a>
+        <a href="#">이미지</a>
+        <a href="#"><img src="../img/Google_apps.png" alt=""></a>
+        <button type="button">로그인</button>
+      </div>
     </nav>
   </header>
   <main>
-    <article>
-      <div id="logo">
-        <img src="../img/Google_Logo.png" alt="구글">
-      </div>
-    </article>
-    <section>
+    <div>
+      <img src="../img/Google_Logo.png" alt="">
+    </div>
+    <div>
       <form action="#">
-        <div id="search">
-          <img src="#" alt="돋보기">
-          <input type="search" name="searchDescript" id="searchDescript"></input>
-          <button><img src="#" alt="입력 도구" title="입력 도구"></button>
-          <button><img src="#" alt="음성 검색" title="음성 검색"></button>
-          <button><img src="#" alt="이미지로 검색" title="이미지로 검색"></button>
-        </div>
-        <div id="searchButton">
-          <button>Google 검색</button>
-          <button>I'm Felling Lucky</button>
-        </div>
+        <label for="searchArea"><img src="../img/search.png" alt="" width="20px" height="20px"></label>
+        <textarea name="" id="searchArea"></textarea>
+        <button type="reset"><img src="../img/cancel.png" alt="" width="20px" height="20px"></button>
       </form>
-    </section>
+    </div>
   </main>
-  <footer>
-    <div class="footer_country">
-      <span>대한민국</span>
-    </div>
-    <hr>
-    <div class="footer_info">
-      <ul>
-        <span class="footer_info_left">
-          <ui><a href="#">a</a></ui>
-          <ui><a href="#">a</a></ui>
-          <ui><a href="#">a</a></ui>
-        </span>
-        <span class="footer_info_right">
-          <ui><a href="#">a</a></ui>
-          <ui><a href="#">a</a></ui>
-          <ui><a href="#">a</a></ui>
-        </span>
-      </ul>
-    </div>
-  </footer>
 </body>
 </html>

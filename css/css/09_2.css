@@ -4,9 +4,11 @@
 
   background-image:url("../img/camera_setting.jpg") ;
 
-  background-size: cover;
+  /* background-size: cover; */
 
-  background-position: center;
+  /* background-position: center; */
+  overflow: scroll;
+  background-attachment: local;
 }
 .div-repeat{
   width : 200px;

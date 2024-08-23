@@ -1,0 +1,54 @@
+a:link{
+  color: red;
+}
+
+a:visited{
+  color: green;
+}
+
+a:hover{
+  color : aqua;
+  /* font-size: 9rem; */
+}
+
+a:active{
+  font-size: 3rem;
+}
+
+input:focus{
+  border:3px solid green;
+  outline: none;
+  
+}
+
+input:checked + label{
+  background-color: black;
+}
+
+[type = checkbox]{
+  margin: 0px;
+}
+
+#p1:target{
+  background-color: green;
+}
+
+.container :not(p){
+  color:red;
+}
+/* .container :nth-child(3){
+  color : green;
+} */
+.container :nth-child(n + 2):nth-child(-n+5){
+  color: pink;
+}
+/* 
+.container :nth-child(odd){
+  background-color: gold;
+}
+.container :nth-child(even){
+  background-color: blueviolet;
+}
+.container p:nth-of-type(2){
+  font-size: 2em;
+} */
