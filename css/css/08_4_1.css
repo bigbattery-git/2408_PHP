@@ -1,0 +1,14 @@
+.none{
+  display: none;
+}
+.block{
+  display: block;
+}
+.inline{
+  display: inline;
+}
+.inline_block{
+  display: inline-block;
+  text-align: center;
+  width: 500px;
+}

@@ -1,0 +1,33 @@
+main, div{
+  padding: 20px;
+}
+
+main{
+  background-color: green;
+  width: 300px;
+}
+
+.div-static{
+  background-color: gray;
+  position:static;
+}
+
+.div-relative{
+  background-color: aqua;
+  position: relative;
+}
+.div-relative-absolute{
+  background-color: antiquewhite;
+  position: relative;
+}
+.div-absolute{
+  background-color: blueviolet;
+  position: absolute;
+}
+
+.div-fixed{
+  background-color: rgb(80, 47, 8);
+  position: fixed;
+  right : 10vw;
+  bottom: 10vh;
+}

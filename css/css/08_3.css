@@ -1,0 +1,40 @@
+*{
+  padding: 0px;
+  margin: 20px;
+  box-sizing: border-box;
+}
+
+div{
+  border: 1px solid black;
+  width: 400px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+h1, p{
+  border: 1px solid black;
+  width: 150px;
+  text-align: center;
+}
+h1{
+  margin: 30px auto;
+}
+p{
+  margin: 5px auto;
+}
+
+.container{
+  width: 700px;
+}
+.div_2{
+  padding : 100px;
+}
+
+.div_3, .div_4{
+  width: 200px;
+  height: 200px;
+}
+
+.div_3{
+  /* box-sizing: 수평 수직 흐려지는_정도 번지는_정도 색상 (그림자가_내부/외부); */
+  box-shadow: 10px 10px 10px 10px pink;
+}

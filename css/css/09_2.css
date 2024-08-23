@@ -1,0 +1,17 @@
+.div-img{
+  width : 200px;
+  height : 200px;
+
+  background-image:url("../img/camera_setting.jpg") ;
+
+  background-size: cover;
+
+  background-position: center;
+}
+.div-repeat{
+  width : 200px;
+  height : 200px;
+
+  background-image: url("../img/icon_hospital.png");
+  background-repeat: no-repeat;
+}

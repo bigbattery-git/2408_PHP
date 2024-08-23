@@ -1,0 +1,32 @@
+div{
+  margin: 10px;
+}
+
+.div_1{
+  /* 테두리 선 */
+  border-style: solid;
+
+  /* 테두리 굵기 */
+  border-width: 3px;
+
+  /*각자 다르게 지정할 수 있음
+  1개 : 네 방향 모두
+  2개 : 상하 좌우
+  3개 : 상 좌우 하
+  4개 : 상 우 하 좌
+  border-width: 5px 10px 15px;
+  */
+
+  /* 테두리 색 */
+  border-color: #ff0000;
+
+  /* 테두리 모서리 */
+  border-radius: 5px;
+
+  /* 한 쪽만 둥글게 */
+  border-top-right-radius: 15px;
+}
+
+.div_2{
+  border: 3px solid #ff0000;
+}
