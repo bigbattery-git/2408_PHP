@@ -1,0 +1,55 @@
+*{
+  margin: 0px;
+  padding:0px;
+  box-sizing: border-box;
+}
+form{
+  width:604px;
+  height:805px;
+  background-image: url("../img/I_want_you.png");
+}
+fieldset{
+  width: 604px;
+  height:805px;
+  background-color: RGB(255,255,255,0.4);
+}
+
+h1{
+  color: #FF00FF;
+}
+
+form label{
+  font-weight: 900;
+}
+
+form textarea{
+  width: 300px;
+  height: 200px;
+}
+
+input, textarea{
+  background : transparent;
+}
+
+form input:focus, form textarea:focus{
+  border : 3px solid red;
+  outline-style: none;
+}
+.onButtonHover{
+  display: none;
+  position: absolute;
+  background-color: black;
+  color: white;
+  font-size: 24px;
+}
+
+.required::before{
+  content: "*";
+  color: red;
+}
+[name="sex"]:checked+label{
+  color: red;
+}
+button:hover+.onButtonHover{
+  display: inline;
+}

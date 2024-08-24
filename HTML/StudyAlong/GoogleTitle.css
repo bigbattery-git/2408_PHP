@@ -1,0 +1,30 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+ul{
+  list-style-type: none;
+  display: inline-block;
+}
+
+#headerleft{
+  margin : 30px;
+}
+#headerright{
+  
+}
+
+li{
+  display: inline-block;
+}
+
+textarea{
+  border-left:0px none white;
+  border-right: 0px none white;
+  width:403.4px;
+  height:46px;
+  resize: none;
+  outline: none;
+}
