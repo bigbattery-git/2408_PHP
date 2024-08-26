@@ -1,0 +1,83 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+form{
+  margin-left: 10px;
+  margin-top: 10px;
+
+  width: 500px;
+  height:500px;
+}
+
+fieldset{
+  height: 100%;
+
+  background-image: url(../../HTML/img/10_2homework.jpg);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% 100%;
+}
+
+h1{
+  color: #ff00ff;
+}
+
+label{
+  font-weight: 900;
+}
+
+div{
+  margin: 20px 15px;
+}
+
+p{
+  display: none;
+  background-color: black;
+  color:white;
+  font-size: 24px;
+}
+
+input, textarea{
+  background: transparent;
+}
+
+input:focus,textarea:focus{
+  outline: none;
+  border:3px solid red;
+}
+
+input::after{
+  content: "";
+  background-color: transparent;
+}
+
+textarea{
+  width: 300px;
+  height: 150px;
+  resize: none;
+}
+
+.required-label::before{
+  content: "*";
+  color: red;
+}
+
+[type="radio"]:focus+label{
+  color: red;
+}
+
+[for="wanna"]{
+  vertical-align: top;
+}
+
+button{
+  vertical-align: top;
+  margin-left: 10px;
+}
+
+button:hover+p{
+  display: inline;
+}
