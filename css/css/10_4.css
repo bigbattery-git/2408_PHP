@@ -1,0 +1,12 @@
+*{
+  margin-left: 10px;
+}
+
+.required::after{
+  content: " *";
+  color: red;
+}
+
+p::first-line{
+  color:red;
+}
