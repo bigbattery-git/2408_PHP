@@ -1,0 +1,32 @@
+html{
+  background-color: black;
+
+  font-size: 20px;
+}
+
+.container{
+  display: grid;
+  height : 300px;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 2fr 1fr;
+}
+
+header{
+  background-color: aqua;
+  /* grid-area: header; */
+}
+
+nav{
+  background-color: red;
+  /* grid-area: nav; */
+}
+
+main{
+  background-color: blue;
+  /* grid-area: main; */
+}
+
+footer{
+  background-color: green;
+  /* grid-area: footer; */
+}
