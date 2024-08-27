@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing: border-box;
+    }
+    .container{
+      margin : 10px;
+      background-color: gray;
+      display: flex;
+      flex-direction: column;
+      width: 450px;
+      height: 650px;
+      gap: 10px;
+      justify-content: center;
+      align-content: center;
+    }
+    header{
+      display: flex;
+      flex-direction: row;
+
+      gap: 10px;
+
+      justify-content: center;
+    }
+    main{
+      display: flex;
+      flex-direction: row;
+
+      gap: 10px;
+      justify-content: center;
+    }
+    footer{
+      display: flex;
+      flex-direction: row;
+      
+      gap: 10px;
+
+      justify-content: center;
+    }
+    .item{
+      border: 1px solid black;
+      background-color: aqua;
+      width: 200px;
+      height: 200px;
+    }
+    .item56{
+      height:95px;
+    }
+    .footer-row2{
+      display: flex;
+
+      flex-direction: column;
+      gap: 10px;
+    }
+    .main-col1{
+      width: 410px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="item">1</div>
+      <div class="item">2</div>
+    </header>
+    <main>
+      <div class="item main-col1">3</div>
+    </main>
+    <footer>
+      <div class="item">4</div>
+      <div class="footer-row2">
+        <div class="item item56">5</div>
+        <div class="item item56">6</div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
