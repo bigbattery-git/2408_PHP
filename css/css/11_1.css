@@ -1,7 +1,7 @@
-.ball{
+.ball {
   width: 100px;
   height: 100px;
-  background-color: deepskyblue;
+  background-color: deepskyblue; 
   border-radius: 50%;
   animation: updown 1s infinite alternate ease-in;
 }
