@@ -1,0 +1,21 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container{
+  display: grid;
+  margin: auto 30%;
+  grid-template-rows: 1fr 2fr 1fr;
+}
+.header, .main, .footer{
+  border:1px solid black;
+  height : 20rem;
+}
+
+.header{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}

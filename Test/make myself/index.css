@@ -1,0 +1,146 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container{
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: 100vh;
+
+  grid-template-areas: 
+  'sidebar main';
+}
+
+/* sidebar */
+.sidebar{
+  grid-area: sidebar;
+  background-color: #FF3B49;
+}
+
+.sidebar-title{
+  color : white;
+  margin : 50px 0;
+  text-align: center;
+}
+
+.sidebar-menu-menulist{
+  list-style: none;
+}
+
+.sidebar-menu{
+  margin-bottom: 30px;
+}
+
+.sidebar-menu-menuTitle{
+  color : white;
+  font-size: 1.1rem;
+  background-color: #ff5662;
+  padding: 10px 15px;
+  
+}
+
+.sidebar-menu-menulist-element{
+  padding : 5px 15px;
+
+  font-size: 0.9rem;
+  color : white;
+}
+
+.sidebar-menu-menulist-element:hover{
+  animation: changeMenuBackground 0.5s forwards;
+}
+
+@keyframes changeMenuBackground{
+  from{
+    background-color: transparent;
+  }
+  to{
+    background-color: #000000cc;
+  }
+}
+
+.sidebar-menu-menulist-element>a{
+  color: white;
+  text-decoration: none;
+}
+
+/* main */
+
+.main{
+  grid-area: main;
+
+  /* display: grid;
+
+  grid-template-rows: 50px 300px 1fr; */
+}
+
+/* header */
+.header{
+  height: 50px;
+}
+.searchForm{
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  align-items: center;
+  padding : 5px 1rem;
+}
+
+.searchForm-input{
+  width: 80%;
+  height: 100%;
+}
+
+.searchForm-button{
+  width: 40px;
+  height : 40px;
+  border:none;
+  border-radius: 50%;
+  background-color: #6e5aF0;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+/* subtitle */
+
+.subTitle{
+  background-image: url(../Marvel/marvel_img/main_title.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  height: 300px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subtitle-title{
+  font-size: 3rem;
+  color : white;
+}
+
+/* content */
+
+.content{
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  padding : 1rem;
+  gap: 15px;
+}
+
+.content-card{
+  background-color: gray;
+  padding:10px;
+}
+
+.content-card-image{
+  padding-top: 70%;
+  background-size : cover;
+  background-position: top;
+}
