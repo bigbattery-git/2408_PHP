@@ -8,14 +8,56 @@
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <img src="./logo-coupang.x2.20201201.png" alt="">
+    <div class="logo">
+      <img src="./logo-coupang.x2.20201201.png" alt="" class="logo-image">
     </div>
-    <div class="main">
-
+    <div class="navTap">
+      <button type="button" class="navTap-btn navTap-email">이메일 로그인</button>
+      <button type="button" class="navTap-btn navTap-Phone">휴대폰번호 로그인</button>
+      <button type="button" class="navTap-btn navTap-QR" >QR코드 로그인</button>
     </div>
-    <div class="footer">
-
+    <hr>
+    <div class="login">
+      <form action="#" class="login-form">
+        <div class="login-div login-div-ID">
+          <label for="ID" class="login-label">
+            <i class="login-label-icon login-label-icon-ID"></i>
+          </label>
+          <input type="email" name="ID" id="ID" class="login-input" placeholder="   아이디(이메일)">
+          <div class="login-ButtonZone">
+            <button type="button" class="login-Button login-Button-ID"></button>
+          </div>
+        </div>
+        <div class="login-div login-div-PW">
+          <label for="PW" class="login-label">
+            <i class="login-label-icon login-label-icon-PW"></i>
+          </label>
+          <input type="password" name="PW" id="PW" class="login-input" placeholder="   비밀번호">
+          <div class="login-ButtonZone">
+            <button type="button" class="login-Button login-Button-PW"></button>
+          </div>
+        </div>
+        <div class="login-elseCategory">
+          <div class="login-elseCategory-autoLogin">
+            <input type="checkbox" name="autoLogin" id="autoLogin" class="login-elseCategory-checkbox">
+            <label for="autoLogin" class="login-elseCategory-label">자동 로그인</label>
+          </div>
+          <a href="#" class="login-elseCategory-searchIDPW">아이디∙비밀번호 찾기 ></a>
+        </div>
+        <button type="submit" class="login-btnLogin">로그인</button>
+      </form>
+    </div>
+    <hr>
+    <div class="signUp">
+      <button type="button" class="signUp-btn">회원가입</button>
+    </div>
+    <div class="CoupangBiz">
+      <p class="CoupangBiz-info">법인 고객이신가요?<br>
+      사업자 회원으로 전용 특가 혜택을 누려보세요.</p>
+      <a href="#" class="CoupangBiz-Link">쿠팡비즈 간편가입 ></a>
+    </div>
+    <div class="copyright">
+      <span>©Coupang Corp. All rights reserved.</span>
     </div>
   </div>
 </body>

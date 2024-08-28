@@ -4,18 +4,177 @@
   box-sizing: border-box;
 }
 
-.container{
-  display: grid;
-  margin: auto 30%;
-  grid-template-rows: 1fr 2fr 1fr;
-}
-.header, .main, .footer{
-  border:1px solid black;
-  height : 20rem;
-}
-
-.header{
+body{
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+}
+
+.container{
+  max-width: 400px;
+  margin-top: 50px;
+}
+
+.navTap{
+  display: flex;
+
+  justify-content: space-between;
+  padding : 20px;
+}
+.navTap-btn{
+  background-color: transparent;
+  border : none;
+}
+
+/* login */
+.login-div{
+  margin: 10px 0;
+
+  width:100%;
+  height:48px;
+
+  border : 1px solid #ccc;
+
+  display : flex;
+
+  justify-content: center;
+}
+
+.login-label{
+  display: flex;
+  min-width:45px;
+  height: 100%;
+
+  background-color: #fafafa;
+  border-left:1px solid #ccc;
+  border-right : 1px solid #ccc;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-label:hover{
+  cursor: pointer;
+}
+
+.login-label-icon{
+  display: block;
+  background-image: url(./Coupang-Login-Sprite.png);
+  width:20px;
+  height:16px;
+
+  background-size: 148px 148px;
+  background-repeat: no-repeat;
+}
+
+.login-input{
+  width: 100%;
+  height:100%;
+  border:none;
+  outline: none;
+}
+
+.login-ButtonZone{
+  width:46px;
+  height:100%;
+  border-right : 1px solid #ccc;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.login-Button{
+  display: inline-block;
+
+  width: 20px;
+  height: 20px;
+
+  background-image: url("./Coupang-Login-Sprite.png");
+  background-repeat: no-repeat;
+  
+  background-size: 148px 148px;
+
+  border:none;
+  background-color: transparent;
+}
+
+/* ID 아이콘 */
+.login-label-icon-ID{
+  background-position: -1px -1px;
+}
+
+.login-Button-ID{
+  background-position: -85px -1px;
+}
+
+/* PW 아이콘 */
+
+.login-label-icon-PW{
+  height:20px;
+  background-position: -22px -1px;;
+}
+
+.login-Button-PW{
+  background-position: -106px -1px;
+}
+
+/* login-elseCategory */
+/* auto login, findIDPW */
+
+.login-elseCategory{
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-elseCategory-checkbox{
+  width: 20px;
+  height: 20px;
+  border-radius: 20%;
+}
+
+.login-elseCategory-label{
+  vertical-align: top;
+}
+
+.login-elseCategory-searchIDPW{
+  text-decoration: none;
+}
+
+/* login button */
+
+.login-btnLogin{
+  background-color: #346aff;
+  border: none;
+  border-radius: 10px;
+  
+  width:100%;
+  height: 44px;
+
+  margin : 10px 0;
+}
+
+/* sign up */
+
+.signUp-btn{
+  border: none;
+  border-radius: 10px;
+  
+  width:100%;
+  height: 44px;
+
+  margin : 10px 0;
+}
+
+.CoupangBiz{
+  margin-top: 50px;
+  text-align: center;
+}
+
+.CoupangBiz-Link{
+  text-decoration: none;
+}
+
+.copyright{
+  margin: 15px 0px;
+  text-align: center;
 }
