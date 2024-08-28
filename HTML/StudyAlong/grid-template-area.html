@@ -3,15 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./grid-template-area.css">
   <title>Document</title>
+  <style>
+    html{
+      background-color: black;
+
+      font-size: 20px;
+    }
+
+    .container{
+      display: grid;
+      height : 300px;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: 1fr 2fr 1fr;
+      grid-template-areas: 
+      'a a'
+      'b c'
+      'b d';
+    }
+
+    header{
+      background-color: aqua;
+      grid-area:a;
+    }
+
+    nav{
+      background-color: red;
+      grid-area: b;
+    }
+
+    main{
+      background-color: blue;
+      grid-area: c;
+    }
+
+    footer{
+      background-color: green;
+      grid-area: d;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <header></header>
-    <nav></nav>
-    <main></main>
-    <footer></footer>
+    <header>Header</header>
+    <nav>Nav</nav>
+    <main>Main</main>
+    <footer>Footer</footer>
   </div>
 </body>
 </html>
