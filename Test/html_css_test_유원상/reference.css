@@ -145,7 +145,8 @@ html{
   align-items: center;
 
   width: 100vw;
-  height : 6vh;
+
+  padding: 20px 0;
 
   background-color: #333333;
 
