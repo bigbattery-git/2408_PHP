@@ -37,15 +37,30 @@ html{
 .header-leftside-title{
   color: white;
   font-size: 4rem;
+
+  animation: showText 1s forwards;
+}
+
+@keyframes showText {
+  from{
+    transform: translateY(-30px);
+    color: rgba(255,255,255,0);
+  }
+  to{
+    transform: translateY(0px);
+    color: rgba(255,255,255,1);
+  }
 }
 
 /* header - rightside */
 
 .header-rightside-info{
   font-size: 1.5rem;
-  color: white;
+  color: rgba(255,255,255,0);
 
   margin : 30px 0 10px 0;
+
+  animation: showText 1s 0.5s forwards;
 }
 
 .header-rightside-btn{
