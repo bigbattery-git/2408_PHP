@@ -248,26 +248,3 @@ SELECT emp_id, max(salary)
 FROM salaries
 GROUP BY emp_id
 ;
-
--- 최고 연봉이 50,000,000 이상인 emp_id, 같은 emp_id에서 최고연봉을 가져오시오  
-SELECT emp_id ,MAX(salary)
-FROM salaries
-GROUP BY emp_id
-	having Max(salaries.salary) >= 50000000
-;
-
--- dept_code 기준으로 묶어서 end_at 값이 null이 아닌 데이터의 개수를 가져오시오
-
-SELECT department_emps.dept_code, COUNT(*) AS empsCount
-FROM department_emps
-WHERE department_emps.end_at IS null
-GROUP BY department_emps.dept_code
-;
-
--- 근무종료일이 NULL인 데이터를 가져오시오 = 현재 근무중인 사람들의 데이터를 가져오시오
--- end_at 값이 있다는 뜻은 근무가 끝났다는 뜻이므로
-SELECT *
-FROM department_emps
-WHERE 
-	department_emps.end_at IS NULL
-;
