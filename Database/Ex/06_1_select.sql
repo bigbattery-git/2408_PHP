@@ -247,6 +247,7 @@ ORDER BY NAME ASC, birth DESC
 SELECT emp_id, max(salary)
 FROM salaries
 GROUP BY emp_id
+<<<<<<< HEAD
 ;
 
 -- 최고 연봉이 50,000,000 이상인 emp_id, 같은 emp_id에서 최고연봉을 가져오시오  
@@ -295,4 +296,6 @@ WHERE [쿼리 조건]
 GROUP BY [컬럼명] HAVING [집계함수 조건]
 ORDER BY [컬럼명 ASC || 컬럼명 DESC]
 LIMIT [n] OFFSET [n]
+=======
+>>>>>>> bff6ae81aad3c8916004bbd05164325ef4797dcf
 ;
