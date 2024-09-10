@@ -1,5 +1,6 @@
 <?php
 
+  echo "Hello World!";
   // 조건문
 
   $value = 5;
@@ -32,6 +33,8 @@
     echo "당신은 순위권 밖입니다. 다음에는 더 잘할 수 있습니다!";
   }
 
+  
+
 
   // IF로 만들어주세요.
 // 성적
@@ -46,24 +49,40 @@
 
   $score = 75;
   $rank;
-  if($score === 100){
-    $rank = "A+";
+  $ischeck = false;
+
+  if($ischeck === true){
+    if($score === null){
+      $rank = "A+";
+    }
+    else if(90 <= $score){
+      $rank = "A";
+    }
+    else if(80 <= $score){
+      $rank = "B";
+    }
+    else if(70 <= $score){
+      $rank = "C";
+    }
+    else if(60 <= $score){
+      $rank = "D";
+    }
+    else{
+      $rank = "F";
+    }
   }
-  else if(90 <= $score){
-    $rank = "A";
-  }
-  else if(80 <= $score){
-    $rank = "B";
-  }
-  else if(70 <= $score){
-    $rank = "C";
-  }
-  else if(60 <= $score){
-    $rank = "D";
-  }
-  else{
-    $rank = "F";
-  }
+
   
   echo "당신의 점수는".$score."점 입니다. <$rank>";
+
+echo (int)(1/3);
+
+$a = 7;
+$b = 3;
+
+echo $a+$b."\n";
+echo $a-$b."\n";
+echo $a*$b."\n";
+echo (int)($a/$b)."\n";
+echo $a%$b;
 ?>
