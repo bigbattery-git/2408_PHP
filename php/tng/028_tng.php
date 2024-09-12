@@ -22,6 +22,32 @@
       echo "\n";
   }
 
+  $count = 100;
+  $is3 = false;
+  for($i = 1; $i<=$count; $i++){
+    $is3 = false;
+
+    $isstring = (string)$i;
+
+    for($j = 0; $j < strlen($isstring); $j++){
+      if( $isstring[$j] === "3" ||
+          $isstring[$j] === "6" ||
+          $isstring[$j] === "9"){
+        $is3 = true;
+        break;
+      }
+    }
+
+    if($is3){
+      echo "짝 ";
+    }
+    
+    else{
+      echo $i." ";
+    }
+  }
+
+
 // 2. 반복문을 이용하여 급여가 5000이상이고, 성별이 남자인 사원의 id와 이름을 출력해주세요.
 
   $arr = [
