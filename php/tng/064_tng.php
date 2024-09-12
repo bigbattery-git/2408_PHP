@@ -80,3 +80,21 @@ for($i = 0; $i< 6;){
 foreach($rememberNum as $value){
   echo $value."\n";
 }
+
+$rememberNum = [];        // 이미 사용한 변수 저장할 공간
+$isOverlap = false;       // 이미 사용했다면 true로 반환할 것
+for($i = 0; $i< 6;){      // 여섯 번 실행하라는 뜻
+  $num = random_int(1,45);// 1부터 45사이의 난수를 출력할 것
+  $isOverlap = false;     // 초기화
+  for($j = 0 ; $j < count($rememberNum); $j++) 
+  if($num === $rememberNum[$j]){
+    $isOverlap = true;
+    break;
+  }
+  if($isOverlap){
+    continue;
+  }
+  $rememberNum[$i] = $num;
+  echo $num."\n";
+  $i ++;
+}
