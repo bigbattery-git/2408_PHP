@@ -2,12 +2,16 @@
 
 function my_db_conn(){
   $my_host = "127.0.0.1";   // 접속하고자 하는 서버의 ip주소. 자기 컴퓨터로 접속하면 "localhost"라고 적어도 됨
+  $my_port = "3306";        // 포트. 안 적으면 3306 기본 포트가 디폴트로 입력됨
   $my_user = "root";        // DB 계정명
   $my_password = "php504";  // DB 비밀번호
   $my_db_name = "dbsample"; // 접속할 DB 이름
   $my_charset = "utf8mb4";  // DB Character set
 
-  $my_dsn = "mysql:host=".$my_host.";dbname=".$my_db_name.";charset=".$my_charset; // DB에 접속하기 위한 정보를 담고 있는 문자열
+  $my_dsn = "mysql:host=".$my_host
+            .";port=".$my_port
+            .";dbname=".$my_db_name
+            .";charset=".$my_charset; // DB에 접속하기 위한 정보를 담고 있는 문자열
 
   //  PDO 옵션 설정
   $my_otp = [

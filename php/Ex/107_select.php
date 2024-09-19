@@ -10,17 +10,32 @@
     $id = 1;
     $name = "홍길동";
   
-    $sql = " SELECT           " 
-          ." *                "
-          ." FROM employees   " 
-          ." WHERE            "
-          ." emp_id = :emp_id "
-          ." OR name = :name  "
+    // $sql = " SELECT           " 
+    //       ." *                "
+    //       ." FROM employees   " 
+    //       ." WHERE            "
+    //       ." emp_id = :emp_id "
+    //       ." OR name = :name  "
+    //       ;
+    
+    // $arr_prepare = [
+    //   "emp_id" => $id,
+    //   "name"   => $name
+    // ];
+
+    // select with prepared Statement
+
+    $sql = " SELECT                       "
+          ." *                            "
+          ." FROM                         "
+          ." employees                    "
+          ." WHERE                        "
+          ." emp_id IN (:emp_id1, :emp_id2) "
           ;
     
-    $arr_prepare = [
-      "emp_id" => $id,
-      "name"   => $name
+    $arr_prepare = [ 
+      "emp_id1" => 10001,
+      "emp_id2" => 10002
     ];
   
     $stmt = $conn->prepare($sql); // sql 질의 준비
