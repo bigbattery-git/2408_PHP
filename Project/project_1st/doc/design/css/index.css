@@ -1,0 +1,23 @@
+.main-top {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 10px;
+}
+
+.list-head {
+    background-color: #607ef5;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.list-body {
+    background-color: #fff;
+    margin-top: 10px;
+}
