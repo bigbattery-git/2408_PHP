@@ -4,21 +4,21 @@
   require_once(MY_PATH_DB_LIB);
 
   $conn = null;
+  $offset = (null - 1) * MY_LIST_COUNT;
+
   try{
     $conn = my_db_conn();
 
     $arr_prepare = [
-      "list_cnt" => 5,
+      "list_cnt" => 10,
       "offset"   => 0
     ];
 
     // pagination select
     $result = my_board_select_pagination($conn, $arr_prepare);
-
-    print_r($result);
   }
   catch(Throwable $tr){
-
+    echo $tr -> getMessage();
   }
 ?>
 
@@ -49,51 +49,20 @@
       </div>
     </div>
 
-    <div class="main-list">
-      <div class="item list-body">
-        <div>30</div>
-        <a href="./detail.html"><div>제목 30</div></a>
-        <div>2024-01-01 10:53:20</div>
+    <?php foreach($result as $value){ ?>
+      <div class="main-list">
+        <div class="item list-body">
+          <div><?php echo $value["id"]; ?></div>
+          <div><a href="./detail.html"><?php echo $value["title"]; ?></a></div>
+          <div><?php echo $value["created_at"]; ?></div>
+        </div>
       </div>
-    </div>
-
-    <div class="main-list">
-      <div class="item list-body">
-        <div>29</div>
-        <a href="./detail.html"><div>제목 29</div></a>
-        <div>2024-01-01 10:53:20</div>
-      </div>
-    </div>
-
-    <div class="main-list">
-      <div class="item list-body">
-        <div>28</div>
-        <a href="./detail.html"><div>제목 28</div></a>
-        <div>2024-01-01 10:53:20</div>
-      </div>
-    </div>
-
-    <div class="main-list">
-      <div class="item list-body">
-        <div>27</div>
-        <a href="./detail.html"><div>제목 27</div></a>
-        <div>2024-01-01 10:53:20</div>
-      </div>
-    </div>
-
-    <div class="main-list">
-      <div class="item list-body">
-        <div>26</div>
-        <a href="./detail.html"><div>제목 26</div></a>
-        <div>2024-01-01 10:53:20</div>
-      </div>
-    </div>
-
+    <?php }?>
 
     <div class="main-footer">
-      <a href="index.html"><button>이전</button></a>
-      <a href="index.html"><button>1</button></a>
-      <a href="index.html"><button>다음</button></a>
+      <a href="index.php"><button>이전</button></a>
+      <a href="index.php"><button>1</button></a>
+      <a href="index.php"><button>다음</button></a>
     </div>    
   </main>
     

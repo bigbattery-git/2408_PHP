@@ -22,3 +22,5 @@ define("MY_PATH_ROOT", $_SERVER["DOCUMENT_ROOT"]); // 웹서버 document root. �
 // 가끔 쓰는 것 : $_SERVER["DOCUMENT_ROOT"] => C:/Apachi24/htdocs/test/public 
 
 define("MY_PATH_DB_LIB", MY_PATH_ROOT."/lib/db_lib.php");
+
+define("MY_LIST_COUNT", 5);
