@@ -4,19 +4,24 @@
   require_once(MY_PATH_DB_LIB);
 
   $conn = null;
-  $offset = (null - 1) * MY_LIST_COUNT;
+
 
   try{
+
+    $page = isset($_GET["page"]) ? (int)$_GET["page"] : 1;
+    $offset = ($page - 1) * MY_LIST_COUNT;
+
     $conn = my_db_conn();
 
     $arr_prepare = [
-      "list_cnt" => 10,
-      "offset"   => 0
+      "list_cnt" => MY_LIST_COUNT,
+      "offset"   => $offset
     ];
 
     // pagination select
     $result = my_board_select_pagination($conn, $arr_prepare);
   }
+
   catch(Throwable $tr){
     echo $tr -> getMessage();
   }
@@ -60,9 +65,12 @@
     <?php }?>
 
     <div class="main-footer">
-      <a href="index.php"><button>이전</button></a>
-      <a href="index.php"><button>1</button></a>
-      <a href="index.php"><button>다음</button></a>
+      <a href="/index.php?page=1"><button>이전</button></a>
+      <a href="/index.php?page=1"><button>1</button></a>
+      <a href="/index.php?page=2"><button>2</button></a>
+      <a href="/index.php?page=3"><button>3</button></a>
+      <a href="/index.php?page=4"><button>4</button></a>
+      <a href="/index.php?page=4"><button>다음</button></a>
     </div>    
   </main>
     
