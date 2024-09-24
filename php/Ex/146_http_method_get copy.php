@@ -1,5 +1,5 @@
 <?php
-  echo $value = isset($_GET["id"]) ? $_GET["id"] : null;
+  echo $value = isset($_POST["id"]) ? $_POST["id"] : null;
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
   <title>Document</title>
 </head>
 <body>
-  <form action="#" method="get">
+  <form action="#" method="POST"> <!-- 여기도 method Post로 변경해야 함 -->
     <input type="text" name="id" id="id">
     <br>
     <button type="submit">제출</button>
