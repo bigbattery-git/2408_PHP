@@ -14,3 +14,13 @@ CREATE TABLE board(
 	,deleted_at TIMESTAMP 
 	
 );
+
+insert into board(
+	title,
+	content
+)
+
+values(
+	"제목1",
+	"내용1"
+);
