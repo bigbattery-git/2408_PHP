@@ -5,13 +5,21 @@
 
   $conn = null;
 
-
   try{
 
-    $page = isset($_GET["page"]) ? (int)$_GET["page"] : 1;
-    $offset = ($page - 1) * MY_LIST_COUNT;
-
     $conn = my_db_conn();
+    $max_board_cnt = my_board_total_count($conn);
+    $max_page = (int)ceil($max_board_cnt/MY_LIST_COUNT); // 남은 데이터까지 전부 나와야 함
+
+    $page = isset($_GET["page"]) ? (int)$_GET["page"] : 1;
+
+    $offset = ($page - 1) * MY_LIST_COUNT;
+    $start_page_button_number = (int)(floor(($page -1)/MY_PAGE_BUTTON_COUNT) * MY_PAGE_BUTTON_COUNT) + 1; // 페이지 시작 값
+    $end_page_button_number = ($start_page_button_number + MY_PAGE_BUTTON_COUNT) - 1;                // 페이지 마지막 값
+    $end_page_button_number = $end_page_button_number > $max_page ? $max_page : $end_page_button_number;
+
+    $prev_page_button_number = $page - 1 < 1 ? 1 : $page - 1;
+    $next_page_button_number = $page + 1 > $max_page ? $max_page : $page + 1;
 
     $arr_prepare = [
       "list_cnt" => MY_LIST_COUNT,
@@ -22,8 +30,10 @@
     $result = my_board_select_pagination($conn, $arr_prepare);
   }
 
-  catch(Throwable $tr){
-    echo $tr -> getMessage();
+  catch(Throwable $th){
+    require_once(MY_PATH_ERROR);
+
+    exit;
   }
 ?>
 
@@ -37,13 +47,11 @@
     <title>리스트 페이지</title>
 </head>
 <body>
-  <header>
-    <h1>mini Board</h1>
-  </header>
+  <?php require_once(MY_PATH_ROOT."header.php") ?>
 
   <main>
     <div class="main-top">
-      <button class="btn-middle">글 작성</button>
+      <button class="btn-middle"><a href="/insert.php">글 작성</a></button>
     </div>   
 
     <div class="main-list">
@@ -58,19 +66,22 @@
       <div class="main-list">
         <div class="item list-body">
           <div><?php echo $value["id"]; ?></div>
-          <div><a href="./detail.html"><?php echo $value["title"]; ?></a></div>
+          <div><a href="/detail.php?id=<?php echo $value["id"]; ?>&page=<?php echo $page; ?>"><?php echo $value["title"]; ?></a></div>
           <div><?php echo $value["created_at"]; ?></div>
         </div>
       </div>
     <?php }?>
 
     <div class="main-footer">
-      <a href="/index.php?page=1"><button>이전</button></a>
-      <a href="/index.php?page=1"><button>1</button></a>
-      <a href="/index.php?page=2"><button>2</button></a>
-      <a href="/index.php?page=3"><button>3</button></a>
-      <a href="/index.php?page=4"><button>4</button></a>
-      <a href="/index.php?page=4"><button>다음</button></a>
+      <?php if($page !== 1){ ?>
+        <a href="/index.php?page=<?php echo $prev_page_button_number ?>"><button>이전</button></a>
+      <?php } ?>
+      <?php for($i = $start_page_button_number; $i<=$end_page_button_number; $i++) { ?>
+        <a href="/index.php?page=<?php echo $i ?>"><button class="btn-small <?php echo $i === $page ? " btn-selected" : "" ?>"><?php echo $i ?></button></a>
+        <?php } ?>
+      <?php if($page !== $max_page){ ?>
+        <a href="/index.php?page=<?php echo $next_page_button_number ?>"><button>다음</button></a>
+      <?php } ?>
     </div>    
   </main>
     

@@ -23,4 +23,8 @@ define("MY_PATH_ROOT", $_SERVER["DOCUMENT_ROOT"]."/"); // 웹서버 document roo
 
 define("MY_PATH_DB_LIB", MY_PATH_ROOT."lib/db_lib.php");
 
-define("MY_LIST_COUNT", 5);
+define("MY_LIST_COUNT", 5);                        // data list count
+
+define("MY_PAGE_BUTTON_COUNT", 5);                 // button count
+
+define("MY_PATH_ERROR", MY_PATH_ROOT."error.php"); // error page
