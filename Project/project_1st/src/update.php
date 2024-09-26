@@ -5,13 +5,9 @@
   $conn = null;
 
   try{
-
-    $conn = my_db_conn();
-    
     if(strtoupper($_SERVER["REQUEST_METHOD"]) === "GET"){
       // Get 처리
       $conn = my_db_conn();
-
       $id = isset($_GET["id"])? (int)$_GET["id"] : 0;
       $page = isset($_GET["page"])? (int)$_GET["page"] : 1;
 
@@ -27,14 +23,19 @@
     }
     else{
       // Post 처리
-      
-
+      $conn = my_db_conn();
       $id = isset($_POST["id"])? (int)$_POST["id"] : 0;
       $page = isset($_POST["page"])? (int)$_POST["page"] : 1;
       $title = isset($_POST["title"])? $_POST["title"] : "";
       $content = isset($_POST["content"])? $_POST["content"] : "";
 
-      $conn = my_db_conn();
+      $arr_prepare =[
+        "title"   => $title,
+        "content" => $content,
+        "id"      => $id
+      ];
+
+      $conn -> beginTransaction();
 
       if($id < 0){
         throw new Exception("파라미터 오류 : update.php id");
@@ -43,16 +44,18 @@
         throw new Exception("파라미터 오류 : update.php title");
       }
 
-      $conn -> beginTransaction();
-      
+      my_board_update($conn, $arr_prepare);
+
       $conn -> commit();
+
       header("Location: /detail.php?id=".$id."&page=".$page);
       exit;
     }
-
   }
-  catch(Throwable $tr){
-    $conn -> rollback();
+  catch(Throwable $th){
+    if(!is_null($conn) && $conn->inTransaction()){
+      $conn -> rollBack();
+    }
     require_once(MY_PATH_ERROR);
     exit;
   }
@@ -72,9 +75,9 @@
   <?php require_once(MY_PATH_ROOT."header.php") ?>
 
   <main>
-    <form action="/update.php?id=<?php echo $id; ?>&" method="post">
+    <form action="/update.php" method="post">
       <input type="hidden" name="id" value = <?php echo $result["id"] ?>>
-      <input type="hidden" name="id" value = <?php echo $page ?>>
+      <input type="hidden" name="page" value = <?php echo $page ?>>
 
       <div class="box title-box">
         <div class="box-title">글번호</div>
@@ -97,7 +100,7 @@
 
       <div class="main-footer">
         <button type="submit" class="btn-small">완료</button>
-        <a href="/detail.php?id=<?php echo $result["id"] ?>&page=<?php echo $page;?>"><button type="button" class="btn-small">취소</button></a>
+        <a href="/detail.php?id=<?php echo $id ?>&page=<?php echo $page;?>"><button type="button" class="btn-small">취소</button></a>
       </div>
     </form>
   </main>

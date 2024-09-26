@@ -62,7 +62,7 @@
     <div class="main-footer">
       <a href="/update.php?id=<?php echo $result["id"] ?>&page=<?php echo $page;?>"><button type="button" class="btn-small">수정</button></a>
       <a href="/index.php?page=<?php echo $page;?>"><button type="button" class="btn-small">취소</button></a>
-      <a href="/delete.php"><button type="button" class="btn-small">삭제</button></a>
+      <a href="/delete.php?<?php echo "id=".$id."&page=".$page ?>"><button type="button" class="btn-small">삭제</button></a>
     </div>
   </main>
 </body>

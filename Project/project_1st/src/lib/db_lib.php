@@ -15,17 +15,19 @@
   function my_board_select_pagination(PDO $conn, array $arr_param){
 
       $sql = 
-      " SELECT            "
-      ." *                "
-      ." FROM             "
-      ." board            "
-      ." ORDER BY         "
-      ." created_at DESC, "
-      ." id DESC          "
-      ." LIMIT            "
-      ." :list_cnt        "
-      ." OFFSET           "
-      ." :offset          "
+      " SELECT              "
+      ." *                  "
+      ." FROM               "
+      ." board              "
+      ." WHERE              "
+      ." deleted_at IS NULL "
+      ." ORDER BY           "
+      ." created_at DESC,   "
+      ." id DESC            "
+      ." LIMIT              "
+      ." :list_cnt          "
+      ." OFFSET             "
+      ." :offset            "
       ;
   
       $stmt = $conn->prepare($sql);
@@ -129,6 +131,36 @@
 
     if($result_cnt < 1){
       throw new Exception("쿼리 개수 오류 : my_board_update");
+    }
+
+    return true;
+  }
+
+  /**
+   * soft delete board
+   * @param $conn : PDO Class
+   * @param $arr_param : id = :id
+   */
+  function my_board_delete_id(PDO $conn, array $arr_param){
+    $sql = 
+    " UPDATE board        ".
+    " SET                 ".
+	  " updated_at = NOW()  ".
+	  " ,deleted_at = NOW() ".
+    " WHERE               ".
+    " id = :id            ".
+    " ;                   "
+    ;
+
+    $stmt = $conn -> prepare($sql);
+    $result_flg = $stmt -> execute($arr_param);
+    $result_cnt = $stmt -> rowCount();
+    if(!$result_flg){
+      throw new Exception("쿼리 실행 실패 : my_board_delete");
+    }
+
+    if($result_cnt < 1){
+      throw new Exception("쿼리 개수 오류 : my_board_delete");
     }
 
     return true;
