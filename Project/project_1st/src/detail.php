@@ -57,6 +57,12 @@
         <div class="box-title">작성일자</div>
         <div class="box-content"><?php echo $result["created_at"]; ?></div>
       </div>
+      <?php if(isset($result["img"])) { ?>
+        <div class="box">
+          <div class="box-title">이미지</div>
+          <div class="box-content"><img src="<?php echo $result["img"]; ?>" alt="이미지"></div>
+        </div>
+      <?php } ?>
     </div>
           
     <div class="main-footer">

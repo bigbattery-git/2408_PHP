@@ -117,6 +117,7 @@
       " title = :title      ".
       " ,content = :content ".
       " ,updated_at = now() ".
+      (isset($arr_param["img"]) ? " ,img = :img" : "").
       " WHERE               ".
       " id = :id            ".
       " ;                   "

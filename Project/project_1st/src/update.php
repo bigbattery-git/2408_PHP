@@ -28,6 +28,7 @@
       $page = isset($_POST["page"])? (int)$_POST["page"] : 1;
       $title = isset($_POST["title"])? $_POST["title"] : "";
       $content = isset($_POST["content"])? $_POST["content"] : "";
+      $file = $_FILES["file"];
 
       $arr_prepare =[
         "title"   => $title,
@@ -36,6 +37,17 @@
       ];
 
       $conn -> beginTransaction();
+
+      if($file["name"] !== ""){
+        $file_type = explode("/", $file["type"]);
+        $file_extension = $file_type[1];
+        $file_name = uniqid().".".$file_extension;
+        $file_path = "resources/".$file_name;
+
+        move_uploaded_file($file["tmp_name"], $file_path);
+
+        $arr_prepare["img"] = $file_path;
+      }
 
       if($id < 0){
         throw new Exception("파라미터 오류 : update.php id");
@@ -75,7 +87,7 @@
   <?php require_once(MY_PATH_ROOT."header.php") ?>
 
   <main>
-    <form action="/update.php" method="post">
+    <form action="/update.php" method="post" enctype="multipart/form-data">
       <input type="hidden" name="id" value = <?php echo $result["id"] ?>>
       <input type="hidden" name="page" value = <?php echo $page ?>>
 
@@ -95,6 +107,13 @@
         <div class="box-title">내용</div>
         <div class="box-content">
           <textarea name="content" id="content"><?php echo $result["content"] ?></textarea>
+        </div>
+      </div>
+
+      <div class="box image-box">
+        <div class="box-title">내용</div>
+        <div class="box-content">
+        <input type="file" name="file" id="file">
         </div>
       </div>
 
