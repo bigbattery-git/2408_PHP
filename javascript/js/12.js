@@ -12,16 +12,28 @@
 
 // console.log(함수명(1, 2));
 
+// 즉시실행 함수 
 
-const person = {
-    name: ["Bob", "Smith"],
-    age: 32,
-    gender: "male",
-    interests: ["music", "skiing"],
-    bio: 'al2',
-    greeting: function () {
-      alert("Hi! I'm " + this.name[0] + ".");
-    },
-  };
+const 함수명 = (function(파라미터1, 파라미터2){
+  return 파라미터1 + 파라미터2
+})(1,2);
 
-console.log(person);
+function pool(){
+  console.log('바보당');
+}
+
+// 콜백 함수
+/**
+ * 걷는 사람한테 바보라고 하는 함수
+ * @param {console.log 있는 함수} execute 
+ * @param {boolean} flg1 
+ * @param {boolean} flg2 
+ */
+function 걷기(execute, flg1, flg2){
+
+  if(flg1){
+    execute();
+  }
+}
+
+걷기(pool, true, false);
