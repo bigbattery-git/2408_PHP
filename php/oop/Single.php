@@ -6,7 +6,7 @@ class Single{
 
   public static function GetInstance(){
     
-    return $this;
+    return $this::class;
 
   }
 }

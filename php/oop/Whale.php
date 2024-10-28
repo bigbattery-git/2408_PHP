@@ -65,3 +65,4 @@ class Whale extends Mammal implements Swim{
 // }
 
 // Whale::shout();
+
