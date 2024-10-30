@@ -1,0 +1,28 @@
+.blueTitle{
+  color : blue;
+}
+
+.redTitle{
+  color : red;
+}
+
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color : white;
+}
+.close-modal{
+  position: absolute;
+  top : 20px;
+  right : 40px
+}
+.display-none {
+  display: none;
+}

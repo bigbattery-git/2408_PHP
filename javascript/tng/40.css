@@ -1,0 +1,21 @@
+.hidden{
+  position: absolute;
+
+  display : flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: aqua;
+  width: 200px;
+  height: 200px;
+}
+
+.hidden-core{
+  background-color: blue;
+  width: 150px;
+  height: 150px;
+}
+
+.hidden-div{
+  background-color: transparent;
+}

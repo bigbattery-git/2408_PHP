@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/40.js" defer></script>
+  <link rel="stylesheet" href="../css/40.css">
+</head>
+<body>
+  <h1>타이틀</h1>
+  <button type="button" onclick="setColorBlue(document.querySelector('h1'))">색상변경</button>
+  <!-- 인라인 이벤트 -->
+  <button type="button" onclick="{alert('이벤트 실행'); inlineEvent();}">인라인 이벤트 버튼</button>
+
+  <!-- addEventListener 형식 -->
+  <br>
+  <button type="button" id="btn1">이벤트 리스너 버튼</button>
+
+  <br>
+  <button type="button" id="btn_toggle">toggle button</button>
+
+  <!-- 팝업 -->
+  <p id="naver" style="cursor: pointer;">네이버로</p>
+
+  <br>
+  <h2>테스트용</h2>
+  <h3>이벤트 객체 테스트</h3>
+
+  <!-- 모달창 -->
+  <button id="btn_modal" type="button">modal open</button>
+  <div class="modal-container display-none">
+      <button type="button" class="close-modal" id="btn_close">닫기</button>
+      <div class="modal-item">
+          <p>모달모달</p>
+      </div>
+  </div>
+</body>
+</html>
