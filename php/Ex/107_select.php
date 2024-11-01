@@ -43,7 +43,7 @@
   
     $result = $stmt->fetchAll();  // 질의 결과 패치
     
-    print_r($result);
+    return json_decode($result);
   }
   catch(Throwable $th){
     // echo $th->getMessage()."\n";  // 예외 메시지 출력
