@@ -5,6 +5,6 @@ function getList(){
 	const URL = document.querySelector('#url').value;
 	
 	axios.get(URL)
-	.then(data => document.querySelector('div').innerHTML = data.data[0].id)
+	.then(data => console.log(data))
 	.catch(error => console.log(error));
 }
