@@ -17,15 +17,15 @@
 	</header>
 
 	<main class="d-flex justify-content-center align-items-center h-75">
-		<form style="width: 300px;">
-			<div id="errorMsg" class="form-text text-danger">에러뜸.</div>
+		<form style="width: 300px;" action="/login" method="post">
+			<?php require_once('View/inc/errorMsg.php'); ?>
 			<div class="mb-3">
-				<label for="id" class="form-label">Email address</label>
-				<input type="email" class="form-control" id="id" name="id">
+				<label for="u_email" class="form-label">Email address</label>
+				<input type="email" class="form-control" id="u_email" name="u_email">
 			</div>
 			<div class="mb-3">
-				<label for="password" class="form-label">Password</label>
-				<input type="password" class="form-control" id="password" name="password"> 
+				<label for="u_password" class="form-label">Password</label>
+				<input type="password" class="form-control" id="u_password" name="u_password"> 
 			</div>
 			<button type="submit" class="btn btn-dark mb-3" style="width: 100%;">로그인</button>
 			<a href="./regist.html" class="btn btn-secondary" style="width: 100%;">회원가입</a>

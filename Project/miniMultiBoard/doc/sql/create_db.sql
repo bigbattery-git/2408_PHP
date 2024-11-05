@@ -66,3 +66,10 @@ VALUES	(1, '0', '자유1', '자유내용1', '/View/img/nondam_f.png')
 ;
 
 
+SELECT *
+FROM users
+WHERE u_email = :u_email
+;
+
+INSERT INTO boards_category(bc_type, bc_name)
+VALUES 	('2', '문희게시판');
