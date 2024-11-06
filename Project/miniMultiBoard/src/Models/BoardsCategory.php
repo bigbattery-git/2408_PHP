@@ -35,13 +35,13 @@ class BoardsCategory extends Model{
 	public function getBoardNameList(){
 		try{
 			$sql = 
-			' SELECT 			'
-			.' bc_name 			'
-			.' ,bc_type 		'
-			.' FROM 			'
+			' SELECT 						'
+			.' bc_name 					'
+			.' ,bc_type 				'
+			.' FROM 						'
 			.' boards_category 	'
-			.' ORDER BY 		'
-			.' bc_type ASC 		'
+			.' ORDER BY 				'
+			.' bc_type ASC 			'
 			;
 
 			$stmt = $this->conn->query($sql);

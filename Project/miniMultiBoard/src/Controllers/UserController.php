@@ -8,15 +8,27 @@ use Lib\UserValidator;
 use Models\User;
 
 class UserController extends Controller {
+
+	protected $userInfo = [
+		'u_email' 		=> ''
+		,'u_name' 		=> ''
+	];
+
+	/**
+	 * 로그인 창으로 이동
+	 */
 	protected function goLogin() {
 		return 'login.php';
 	}
 	
+	/**
+	 * 로그인 처리 및 게시글 보드로 이동
+	 */
 	protected function login(){
 		// 유저 입력 정보 획득
 		$requestData = [
-			'u_email' 		=> $_POST['u_email']
-			,'u_password' => $_POST['u_password']
+			'u_email' 		=> $this->이즈셋($_POST['u_email'])
+			,'u_password' => $this->이즈셋($_POST['u_password'])
 		];
 
 		// 유효성 검사
@@ -32,10 +44,6 @@ class UserController extends Controller {
 			'u_email' => $requestData['u_email']
 		];
 		$resultUserInfo = $usersModel->getUserInfo($prepare);
-
-		// 유저 비밀번호 암호화
-		$encryptPassword = password_hash($requestData['u_password'], PASSWORD_DEFAULT);
-		password_verify($requestData['u_password'], $encryptPassword);
 		
 		// 유저 존재 유무 체크
 		if(!$resultUserInfo){
@@ -54,5 +62,89 @@ class UserController extends Controller {
 
 		// location 처리
 		return 'Location: /boards';
+	}
+
+	/**
+	 * 로그아웃 후 로그인창으로 이동
+	 */
+	public function logout(){
+		unset($_SESSION['u_email']);
+		session_destroy();
+
+		return 'Location: /login';
+	}
+
+	/**
+	 * 회원가입 창으로 이동
+	 */
+	protected function goRegist() {
+		return 'regist.php';
+	}
+
+	/**
+	 * 이즈셋 깔끔하게하는 함수
+	 */
+	private function 이즈셋(string $value){
+		if(isset($value)) {
+			return $value;
+		} 
+		else {
+			return '';
+		}
+	}
+
+	/**
+	 * 회원가입 및 로그인창 이동
+	 */
+	protected function regist(){
+		$requestData = [
+			'u_email' 				=> $this->이즈셋($_POST['u_email'])
+			,'u_password' 		=> $this->이즈셋($_POST['u_password'])
+			,'u_password_chk' => $this->이즈셋($_POST['u_password_chk'])
+			,'u_name' 				=> $this->이즈셋($_POST['u_name'])
+		];
+
+		$this->userInfo = [
+			'u_name' => $requestData['u_name']
+			,'u_email'=> $requestData['u_email']
+		];
+
+		// 유효성 쳌
+		$resultValidator = UserValidator::chkValidator($requestData);
+		if(count($resultValidator) > 0){
+			$this->arrErrorMsg = $resultValidator;
+			return 'regist.php';
+		}
+
+		// 이메일 중복 췍
+		$userModel = new User();
+		$prepare =[
+			'u_email' => $requestData['u_email']
+		];
+		$resultUserInfo = $userModel->getUserInfo($prepare);
+		if($resultUserInfo){
+			$this->arrErrorMsg[] = '이미 존재하는 이메일입니다.';
+			return 'regist.php';
+		}
+
+		// 회원가입 위한 데이터 삽입 과정
+		$userModel->beginTransaction();
+		$prepare =[
+			'u_email'			=>	$requestData['u_email']
+			,'u_password'	=>	password_hash($requestData['u_password'], PASSWORD_DEFAULT)
+			,'u_name'			=>	$requestData['u_name']
+		];
+
+		$resultRegistUserInfo = $userModel->registUserInfo($prepare);
+
+		if($resultRegistUserInfo !== 1) {
+			$userModel->rollBack();
+			$this->arrErrorMsg[] = '회원가입에 실패했습니다.';
+			return 'regist.php';
+		}
+
+		$userModel->commit();
+
+		return 'login.php';
 	}
 }

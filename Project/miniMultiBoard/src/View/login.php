@@ -8,13 +8,7 @@
 	<link rel="stylesheet" href="./css/common.css">
 </head>
 <body class="vh-100">
-	<header>
-		<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="#">미니보드</a>
-			</div>
-		</nav>
-	</header>
+	<?php require_once('View/inc/header.php'); ?>
 
 	<main class="d-flex justify-content-center align-items-center h-75">
 		<form style="width: 300px;" action="/login" method="post">
@@ -28,7 +22,7 @@
 				<input type="password" class="form-control" id="u_password" name="u_password"> 
 			</div>
 			<button type="submit" class="btn btn-dark mb-3" style="width: 100%;">로그인</button>
-			<a href="./regist.html" class="btn btn-secondary" style="width: 100%;">회원가입</a>
+			<a href="/regist" class="btn btn-secondary" style="width: 100%;">회원가입</a>
 		</form>
 	</main>
 
