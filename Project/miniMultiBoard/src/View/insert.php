@@ -19,7 +19,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="b_content" class="form-label">내용</label>
-				<input type="text" class="form-control" id="b_content" name="b_content required> 
+				<input type="text" class="form-control" id="b_content" name="b_content" required> 
 			</div>
 			<div class="mb-3">
 				<label for="file" class="form-label">이미지</label>
@@ -27,6 +27,8 @@
 			</div>
 			<button type="submit" class="btn btn-dark mb-3" style="width: 100%;">작성</button>
 			<a href="/regist" class="btn btn-secondary" style="width: 100%;">취소</a>
+
+			<input type="hidden" name="bc_type" value="<?php echo $this->boardType; ?>">
 		</form>
 	</main>
 

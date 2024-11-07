@@ -20,8 +20,9 @@
 	});
 
 	const btnInsert = document.querySelector('#btnInsert');
+	const inputBoardType = document.querySelector('#inputBoardType');
 	btnInsert.style.cursor = 'pointer';
-	btnInsert.addEventListener('click', ()=>{
-		window.location = '/boards/insert';
+	btnInsert.addEventListener('click', (e)=>{
+		window.location = `/boards/insert?bc_type=${inputBoardType.value}`;
 	})
 })();

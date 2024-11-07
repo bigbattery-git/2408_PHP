@@ -25,6 +25,8 @@ class UserController extends Controller {
 	 * 로그인 처리 및 게시글 보드로 이동
 	 */
 	protected function login(){
+
+		return 'Location: /boards';
 		// 유저 입력 정보 획득
 		$requestData = [
 			'u_email' 		=> $this->이즈셋($_POST['u_email'])
@@ -59,6 +61,7 @@ class UserController extends Controller {
 
 		// 세션에 유저 id 저장 
 		$_SESSION['u_email'] = $requestData['u_email'];
+		$_SESSION['u_id']	=	$resultUserInfo['u_id'];
 
 		// location 처리
 		return 'Location: /boards';
@@ -69,6 +72,7 @@ class UserController extends Controller {
 	 */
 	public function logout(){
 		unset($_SESSION['u_email']);
+		unset($_SESSION['u_id']);
 		session_destroy();
 
 		return 'Location: /login';

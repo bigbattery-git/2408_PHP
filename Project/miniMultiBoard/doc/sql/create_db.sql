@@ -57,8 +57,19 @@ VALUES 	('0', '자유게시판')
 INSERT INTO users(u_email, u_name, u_password)
 VALUES	('admin@admin.com', '관리자', 'cXdlcjEyMzQ=');
 
-INSERT INTO boards(u_id, bc_type, b_title, b_content, b_img)
-VALUES	(1, '0', '자유1', '자유내용1', '/View/img/nondam_f.png')
+INSERT INTO boards(
+u_id, 
+bc_type, 
+b_title, 
+b_content, 
+b_img )
+VALUES	(
+1, 
+'0', 
+'자유1', 
+'자유내용1', 
+'/View/img/nondam_f.png'
+)
 ,			(1, '0', '자유2', '자유내용1', '/View/img/nondam_f.png')
 ,			(1, '0', '자유3', '자유내용1', '/View/img/nondam_f.png')
 ,			(1, '1', '질문1', '질문내용1', '/View/img/nondam_f.png')
