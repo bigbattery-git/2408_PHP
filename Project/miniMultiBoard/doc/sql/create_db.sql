@@ -84,3 +84,22 @@ WHERE u_email = :u_email
 
 INSERT INTO boards_category(bc_type, bc_name)
 VALUES 	('2', '문희게시판');
+
+SELECT COUNT(*) AS cnt, bc_type
+FROM boards
+-- WHERE deleted_at IS NULL
+GROUP BY bc_type
+;
+
+SELECT b_id, b_title
+FROM boards
+ORDER BY b_id
+LIMIT 1
+OFFSET 2
+;
+
+SELECT *
+FROM boards
+WHERE (b_title LIKE '%자유%' OR b_title LIKE '%질문%')  
+AND deleted_at IS NULL
+ORDER BY bc_type;
