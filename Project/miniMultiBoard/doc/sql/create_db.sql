@@ -103,3 +103,5 @@ FROM boards
 WHERE (b_title LIKE '%자유%' OR b_title LIKE '%질문%')  
 AND deleted_at IS NULL
 ORDER BY bc_type;
+
+DROP TABLE boards_category;
