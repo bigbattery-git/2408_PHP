@@ -105,3 +105,12 @@ AND deleted_at IS NULL
 ORDER BY bc_type;
 
 DROP TABLE boards_category;
+
+SELECT boards.b_id, users.u_name, boards.bc_type, boards.b_title, boards.b_content, boards.b_img
+FROM boards
+JOIN users
+ON users.u_id = boards.u_id
+AND boards.deleted_at IS NULL
+ORDER BY boards.created_at DESC, boards.b_id ASC
+LIMIT 100
+;
