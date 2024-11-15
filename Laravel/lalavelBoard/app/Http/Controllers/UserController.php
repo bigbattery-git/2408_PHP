@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Throwable;
 
 class UserController extends Controller
 {
@@ -69,5 +72,56 @@ class UserController extends Controller
 		Session::regenerateToken(); // 보안상의 공격을 막기위해 기존 것을 제거하고 새로운 토큰을 발급 
 
 		return redirect()->route('goLogin');
+	}
+
+	public function goRegister(){
+		return view('register');
+	}
+
+	public function register(Request $data){
+		$validator = Validator::make($data->only(['u_email', 'u_password', 'u_password_chk', 'u_name']),[
+			'u_email' => ['required', 'regex:/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.(com|net|co\.kr|or\.kr|ac\.kr)$/', 'unique:users,u_email'] 
+			,'u_password' => ['required', 'min:6', 'max:20', 'regex:/^(?=.*[a-z])(?=.*\d)(?!.*(.)\1\1)[a-z\d]{6,20}$/']
+			,'u_password_chk' => ['required', 'same:u_password']
+			,'u_name' => ['required', 'min:2', 'max:50', 'regex:/^[가-힣]{2,5}$/u']
+		]);
+
+		// 유효성 검사 관련
+		// u_email: 1. 필수입력, 2. 아이디부분은 영어, 숫자만 가능, @ 필수, 도메인 끝에 co.kr, or.kr, ac.kr, com, net 중 하나가 들어가야 함, 3. 중복 X
+		// u_password : 1. 필수입력, 2. 최소 6자 3. 최대 20자, 4. 소문자, 숫자만 가능, 둘 다 있어야 함
+		// u_password_chk : 1. 필수입력 2. 비밀번호 체크 일치 여부
+		// u_name : 1. 필수입력, 2. 최소 2자 3. 최대 50자 4.한글만 가능
+
+		if($validator->fails()){
+			return redirect()->route('goRegister')
+						->withErrors($validator->errors())
+						->withInput();
+		}
+
+		try{
+			DB::beginTransaction();
+
+			// $userInputInfo = new User();
+			// $userInputInfo->u_email = $data->u_email;
+			// $userInputInfo->u_password = Hash::make($data->u_password);
+			// $userInputInfo->u_name = $data->u_name;
+			// $userInputInfo->save();
+
+			User::create([
+				'u_email' => $data->u_email
+				,'u_password' => Hash::make($data->u_password)
+				,'u_name' => $data->u_name
+			]);
+
+			DB::commit();
+		}catch(Throwable $th){
+			// 디버깅중 아니면 주석처리 할 것
+			// var_dump($th->getMessage());
+			// exit;
+			DB::rollBack();
+			return redirect()->route('goLogin')->withErrors('회원가입 실패함. 물떠놓고 기도하고 다시 하셈');
+		}
+
+		return redirect()->route('goLogin')->with('fromRegister', '회원가입 ㅊㅋ \n로그인 페이지로 이동함');
 	}
 }

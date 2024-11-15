@@ -14,8 +14,9 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+        // 로그인 안되어있으면 라우트 이름 'goLogin'으로 이동할 것
         if (! $request->expectsJson()) {
-            return route('login');
+            return route('goLogin');
         }
     }
 }

@@ -16,4 +16,9 @@
 		})
 	});
 
+	const creater = document.querySelector('#creater');
+
+	creater.addEventListener('click', ()=>{
+		window.location = `http://127.0.0.1:8000/boards/create?bc_type=${document.querySelector("#bc_type").value}`;
+	});
 })();

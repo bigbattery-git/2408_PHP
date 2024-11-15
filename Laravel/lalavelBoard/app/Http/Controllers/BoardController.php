@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+use Throwable;
 
 class BoardController extends Controller
 {
@@ -23,7 +27,10 @@ class BoardController extends Controller
 						->orderBy('boards.b_id')
 						->get();
 
-		return view('Board')->with('datas', $result);
+		return view('Board')
+					->with('datas', $result)
+					->with('title', '자유')
+					->with('bc_type', '0');
 	}
 
 	/**
@@ -32,9 +39,9 @@ class BoardController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	// create : 작성페이지로 이동 
-	public function create()
+	public function create(Request $data)
 	{
-		//
+		return view('create')->with('bc_type', $data->bc_type);
 	}
 
 	/**
@@ -46,7 +53,46 @@ class BoardController extends Controller
 	// store : 작성페이지에서 작성 처리를 함
 	public function store(Request $request)
 	{
-		//
+		$validator = Validator::make($request->only(['b_title', 'b_content', 'b_img']), [
+			'b_title' => ['required', 'max:50']
+			,'b_content' => ['required', 'max:200']
+			,'b_img' => ['required']
+		]);
+
+		// 유효성 검사
+		// b_title : 필수, 최대 50글자
+		// b_content : 필수, 최대 200글자
+		// b_img : 필수
+
+		if($validator->fails()){
+			return redirect()->
+			route('boards.store')->
+			with('bc_type', $request->bc_type);
+		}
+		// $path = $request->file('b_img')->storeAs('img', uniqid(), 'local');
+		$path = $request->file('b_img')->store('img');
+
+		try{			
+			DB::beginTransaction();
+
+			$insertBoardData = new Board();
+			$insertBoardData->u_id = Auth::id();
+			$insertBoardData->bc_type = $request->bc_type;
+			$insertBoardData->b_title = $request->b_title;
+			$insertBoardData->b_content = $request->b_content;
+			$insertBoardData->b_img = $path;
+			$insertBoardData->save();
+
+			DB::commit();
+		} catch(Throwable $th) {
+			// 디버깅할 때만 주석 해제하고 사용할 것
+			// var_dump($th->getMessage());
+			// exit;
+
+			DB::rollBack();
+		}
+
+		return redirect()->route('boards.index')->with('bc_type', $request->bc_type);
 	}
 
 	/**
