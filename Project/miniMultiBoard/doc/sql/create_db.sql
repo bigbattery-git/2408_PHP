@@ -114,3 +114,6 @@ AND boards.deleted_at IS NULL
 ORDER BY boards.created_at DESC, boards.b_id ASC
 LIMIT 100
 ;
+
+DELETE FROM boards
+WHERE b_id NOT IN (1, 2, 3);
