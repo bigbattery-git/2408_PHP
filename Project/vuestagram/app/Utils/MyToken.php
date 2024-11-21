@@ -30,7 +30,7 @@ class MyToken{
 	 */
 	private function createToken(User $user, int $ttl, bool $accessFlg = true){
 		$header=$this->createHeader();
-		$payload=$this->createPayload($user, $ttl);
+		$payload=$this->createPayload($user, $ttl, $accessFlg);
 		$signiture=$this->createSigniture($header, $payload);
 
 		return $header.'.'.$payload.'.'.$signiture;

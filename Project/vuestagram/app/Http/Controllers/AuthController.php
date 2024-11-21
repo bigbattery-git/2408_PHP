@@ -14,14 +14,15 @@ class AuthController extends Controller
         $userInfo = User::where('account', $request->account)->first();
 
         list($accessToken, $refreshToken) = MyToken::createTokens($userInfo);
-        
-        
 
-        // return response()->json([
-        //     'account' => $request->account
-        //     ,'password' => $request->password
-        // ]);
+        $response =[
+            'success' => true
+            ,'msg' => '로그인 성공'
+            ,'accessToken' => $accessToken
+            ,'refreshToken' => $refreshToken
+            ,'data' => $userInfo->toArray()
+        ];
 
-        return 'test';
+        return response()->json($response, 200);
     }
 }
