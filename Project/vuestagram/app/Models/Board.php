@@ -24,4 +24,10 @@ class Board extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+
+    // 항상 이름은 참조할 테이블의 복수형
+    public function users(){    
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

@@ -1,9 +1,11 @@
 <template>
-	<!-- 유저정보 -->
-
-	<div class="board-list-box">
-		<div class="item" @click="openModal" v-for="value in 5" :key="value">
-			<img src="../../../../public/img/sample1.png" alt="">
+	<!-- 보드 리스트 -->
+	<div v-if="loading">
+		<h1>로딩중임 ㅅㄱ</h1>
+	</div>
+	<div v-else class="board-list-box" >
+		<div class="item" @click="openModal" v-for="item in boardList" :key="item">
+			<img :src="item.img" alt="">
 		</div>
 	</div>
 
@@ -20,15 +22,29 @@
 		</div>
 	</div>
 </template>
-<script setup>
-	import { ref } from 'vue';
 
+<script setup>
+	import { computed, onBeforeMount, ref } from 'vue';
+	import { useStore } from 'vuex';
+
+	const store = useStore();
+	const boardList = computed(() => store.state.board.boardList);
+	let loading = ref(store.state.board.isLoading);
+
+	// before mount
+	onBeforeMount(()=>{
+		if(store.state.board.boardList.length < 1){
+			store.dispatch('board/getBoardListPagenation');
+		}
+	});
+	// 모달 관련
 	const modalFlg = ref(false);
 
 	function openModal(){
 		modalFlg.value = true;
 	}
 </script>	
+
 <style>
 	@import url('../../../css/boardList.css');	
 </style>

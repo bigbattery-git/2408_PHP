@@ -43,4 +43,10 @@ class User extends Authenticatable
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    // 유저와 보드의 관계 relationship을 맺겠다는 뜻
+    public function boards(){
+        // 유저 하나가 보드 여러개와의 관계를 가지고 있다는 뜻
+        return $this->hasMany(Board::class, 'user_id');
+    }
 }
