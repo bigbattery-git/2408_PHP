@@ -1,15 +1,32 @@
 <template>
 	<div class="form-box">
 			<h3 class="form-title">글 작성</h3>
-			<img src="" alt="">
-			<textarea name="content" placeholder="내용을 적어주세요" maxlength="200"></textarea>
-			<input type="file" name="file" accept="image/*">
-			<button class="btn btn-bg-black btn-submit">작성</button>
-			<button class="btn btn-submit" @click="$router.back()">취소</button>
+			<img :src="preview" alt="">
+			<textarea name="content" placeholder="내용을 적어주세요" maxlength="200" v-model="boardInfo.content"></textarea>
+			<div style="width: 100%; height: 100px; border: 2px dotted red; color:white">
+				<input type="file" name="file" accept="image/*" @change="setFile" style="width: 100%; height: 100%;">
+			</div>
+			<button class="btn btn-bg-black btn-submit" @click="store.dispatch('board/storeBoard', boardInfo);">작성</button>
+			<button class="btn btn-submit" @click="$router.push('/boards')">취소</button>
 	</div>
 </template>
 <script setup>
+	import { reactive, ref } from 'vue';
+	import { useStore } from 'vuex';
 
+	const store = useStore();
+
+	const boardInfo = reactive({
+		content: ''
+		,file: null
+	});
+
+	const preview = ref('');
+
+	const setFile = (e) => {
+		boardInfo.file = e.target.files[0];
+		preview.value = URL.createObjectURL(boardInfo.file);
+	}
 </script>
 <style>
 	

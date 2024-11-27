@@ -1,4 +1,10 @@
 /* BoardList */
+.board-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .board-list-box {
     display: grid;
     grid-template-columns: repeat(2, minmax(100px, 1fr));

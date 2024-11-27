@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
 	// 그 report 메서드를 override하는 것
 	// 시스템이 작동하다가 에러 발생하면 기록하기 위해 사용(log 등)
 	public function report(Throwable $th){
-		// Log::error('report: '.$th->getMessage());
+		Log::error('report: '.$th->getMessage());
 	}
 
 	/** 커스텀 에러 핸들링 

@@ -22481,6 +22481,57 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/views/components/board/BoardCreateComponent.vue?vue&type=script&setup=true&lang=js":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/views/components/board/BoardCreateComponent.vue?vue&type=script&setup=true&lang=js ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  __name: 'BoardCreateComponent',
+  setup: function setup(__props, _ref) {
+    var __expose = _ref.expose;
+    __expose();
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.useStore)();
+    var boardInfo = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+      content: '',
+      file: null
+    });
+    var preview = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
+    var setFile = function setFile(e) {
+      boardInfo.file = e.target.files[0];
+      preview.value = URL.createObjectURL(boardInfo.file);
+    };
+    var __returned__ = {
+      store: store,
+      boardInfo: boardInfo,
+      preview: preview,
+      setFile: setFile,
+      reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
+      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      get useStore() {
+        return vuex__WEBPACK_IMPORTED_MODULE_1__.useStore;
+      }
+    };
+    Object.defineProperty(__returned__, '__isScriptSetup', {
+      enumerable: false,
+      value: true
+    });
+    return __returned__;
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/views/components/board/BoardListComponent.vue?vue&type=script&setup=true&lang=js":
 /*!********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/views/components/board/BoardListComponent.vue?vue&type=script&setup=true&lang=js ***!
@@ -22496,6 +22547,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 
 
+var loadingText = '로딩중임 ㅅㄱ';
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'BoardListComponent',
   setup: function setup(__props, _ref) {
@@ -22505,19 +22557,78 @@ __webpack_require__.r(__webpack_exports__);
     var boardList = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return store.state.board.boardList;
     });
-    var loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(store.state.board.isLoading);
+    var loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.state.board.isLoading;
+    });
 
     // before mount
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount)(function () {
       if (store.state.board.boardList.length < 1) {
-        store.dispatch('board/getBoardListPagenation');
+        store.dispatch('board/boardListPagenation');
       }
     });
     // 모달 관련
     var modalFlg = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
-    function openModal() {
+    var modalLoading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.state.board.isModalLoading;
+    });
+    var boardDetail = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.state.board.boardDetail;
+    });
+    function openModal(board_id) {
+      store.dispatch('board/showBoard', board_id);
       modalFlg.value = true;
     }
+
+    // 로딩 관련
+    var visibleIndices = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]); // 보이는 글자의 인덱스 배열
+    var intervalId; // interval ID 저장
+
+    var showCharacters = function showCharacters() {
+      var index = 0;
+      var length = loadingText.length;
+      intervalId = setInterval(function () {
+        // 현재 보이는 글자의 인덱스를 업데이트
+        if (index < length + 1) {
+          visibleIndices.value.push(index);
+          index++;
+        } else {
+          // 모든 글자가 보인 후, 다시 사라지기 시작
+          setTimeout(function () {
+            visibleIndices.value = [];
+            index = 0; // 다시 처음으로 리셋
+          }, 1000); // 모든 글자가 보인 후 1초 대기
+        }
+      }, 100); // 1초 간격으로 글자 나타남
+    };
+    var isVisible = function isVisible(index) {
+      return visibleIndices.value.includes(index);
+    };
+
+    // 마지막 글자가 사라지는 애니메이션 상태를 결정
+    var isFadingOut = function isFadingOut(index) {
+      return visibleIndices.value.length === loadingText.length + 1 && index === loadingText.length;
+    };
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
+      showCharacters();
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onUnmounted)(function () {
+      clearInterval(intervalId); // 컴포넌트 언마운트 시 interval 정리
+    });
+
+    // scroll event
+    var boardScrollEvent = function boardScrollEvent(e) {
+      var docHeight = document.documentElement.scrollHeight; // 문서 기준 Y축 총 길이
+      var winHeight = window.innerHeight; // window Y축 총 길이
+      var nowHeight = window.scrollY; // 현재 Y축
+      var viewHeight = docHeight - winHeight; // 끝까지 스크롤 했을 때 Y축의 길이
+
+      if (viewHeight <= nowHeight) {
+        // store.dispatch('board/addBoardList');
+        store.dispatch('board/boardListPagenation');
+      }
+    };
+    window.addEventListener('scroll', boardScrollEvent);
     var __returned__ = {
       store: store,
       boardList: boardList,
@@ -22528,9 +22639,25 @@ __webpack_require__.r(__webpack_exports__);
         loading = v;
       },
       modalFlg: modalFlg,
+      modalLoading: modalLoading,
+      boardDetail: boardDetail,
       openModal: openModal,
+      loadingText: loadingText,
+      visibleIndices: visibleIndices,
+      get intervalId() {
+        return intervalId;
+      },
+      set intervalId(v) {
+        intervalId = v;
+      },
+      showCharacters: showCharacters,
+      isVisible: isVisible,
+      isFadingOut: isFadingOut,
+      boardScrollEvent: boardScrollEvent,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
       onBeforeMount: vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount,
+      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
+      onUnmounted: vue__WEBPACK_IMPORTED_MODULE_0__.onUnmounted,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       get useStore() {
         return vuex__WEBPACK_IMPORTED_MODULE_1__.useStore;
@@ -22710,11 +22837,46 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "form-box"
 };
-function render(_ctx, _cache) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<h3 class=\"form-title\">글 작성</h3><img src=\"\" alt=\"\"><textarea name=\"content\" placeholder=\"내용을 적어주세요\" maxlength=\"200\"></textarea><input type=\"file\" name=\"file\" accept=\"image/*\"><button class=\"btn btn-bg-black btn-submit\">작성</button>", 5)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_2 = ["src"];
+var _hoisted_3 = {
+  style: {
+    "width": "100%",
+    "height": "100px",
+    "border": "2px dotted red",
+    "color": "white"
+  }
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+    "class": "form-title"
+  }, "글 작성", -1 /* HOISTED */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: $setup.preview,
+    alt: ""
+  }, null, 8 /* PROPS */, _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+    name: "content",
+    placeholder: "내용을 적어주세요",
+    maxlength: "200",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $setup.boardInfo.content = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.boardInfo.content]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "file",
+    name: "file",
+    accept: "image/*",
+    onChange: $setup.setFile,
+    style: {
+      "width": "100%",
+      "height": "100%"
+    }
+  }, null, 32 /* NEED_HYDRATION */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn btn-bg-black btn-submit",
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      $setup.store.dispatch('board/storeBoard', $setup.boardInfo);
+    })
+  }, "작성"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-submit",
-    onClick: _cache[0] || (_cache[0] = function ($event) {
-      return _ctx.$router.back();
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return _ctx.$router.push('/boards');
     })
   }, "취소")]);
 }
@@ -22733,44 +22895,64 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   render: () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _public_img_sample3_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../public/img/sample3.png */ "./public/img/sample3.png");
-
 
 var _hoisted_1 = {
-  key: 0
+  "class": "board-list"
 };
 var _hoisted_2 = {
-  key: 1,
   "class": "board-list-box"
 };
-var _hoisted_3 = ["src"];
-var _hoisted_4 = {
-  "class": "board-detail-box"
-};
+var _hoisted_3 = ["onClick"];
+var _hoisted_4 = ["src"];
 var _hoisted_5 = {
-  "class": "item"
+  "class": "loading-container"
 };
 var _hoisted_6 = {
+  "class": "board-detail-box"
+};
+var _hoisted_7 = {
+  "class": "item",
+  style: {
+    "text-align": "center"
+  }
+};
+var _hoisted_8 = {
+  key: 0,
+  "class": "item"
+};
+var _hoisted_9 = ["src"];
+var _hoisted_10 = {
   "class": "etc-box"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 보드 리스트 "), $setup.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _cache[1] || (_cache[1] = [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "로딩중임 ㅅㄱ", -1 /* HOISTED */)]))) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.boardList, function (item) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 보드 리스트 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.boardList, function (item) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "item",
-      onClick: $setup.openModal,
+      onClick: function onClick($event) {
+        return $setup.openModal(item.board_id);
+      },
       key: item
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: item.img,
       alt: ""
-    }, null, 8 /* PROPS */, _hoisted_3)]);
-  }), 128 /* KEYED_FRAGMENT */))])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 상세 모달 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: _public_img_sample3_png__WEBPACK_IMPORTED_MODULE_1__["default"],
+    }, null, 8 /* PROPS */, _hoisted_4)], 8 /* PROPS */, _hoisted_3);
+  }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.loadingText, function (_char, index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      key: index,
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+        'fade-in': $setup.isVisible(index),
+        'fade-out': $setup.isFadingOut(index)
+      })
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_char), 3 /* TEXT, CLASS */);
+  }), 64 /* STABLE_FRAGMENT */))])], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.loading]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 상세 모달 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, _cache[1] || (_cache[1] = [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "로딩중임 ㅅㄱ", -1 /* HOISTED */)]), 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.modalLoading]]), !$setup.modalLoading ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: $setup.boardDetail.img,
     alt: ""
-  }, null, -1 /* HOISTED */)), _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */)), _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "내용임", -1 /* HOISTED */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "작성자 : abc", -1 /* HOISTED */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, null, 8 /* PROPS */, _hoisted_9), _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.boardDetail.content), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)("\uC791\uC131\uC790 : ".concat($setup.boardDetail.users.name)), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $setup.modalFlg = false;
-    })
-  }, "닫기")])])], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.modalFlg]])], 64 /* STABLE_FRAGMENT */);
+    }),
+    "class": "btn btn-bg-black"
+  }, "닫기")])], 512 /* NEED_PATCH */)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$setup.modalLoading]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.modalFlg]])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -23021,6 +23203,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _js_axios_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../js/axios.js */ "./resources/js/axios.js");
+/* harmony import */ var _js_router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../js/router.js */ "./resources/js/router.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,
@@ -23028,21 +23212,40 @@ __webpack_require__.r(__webpack_exports__);
     return {
       boardList: [],
       page: 0,
-      isLoading: true
+      isLoading: true,
+      boardDetail: {},
+      isModalLoading: true,
+      controllFlg: true,
+      lastPageFlg: false
     };
   },
   mutations: {
     setBoardList: function setBoardList(state, boardList) {
-      state.boardList = boardList;
+      state.boardList = state.boardList.concat(boardList);
     },
     setPage: function setPage(state, page) {
       state.page = page;
     },
-    addBoardList: function addBoardList(state, boardList) {
-      state.boardList.push(boardList);
+    setBoardListUnshift: function setBoardListUnshift(state, boardList) {
+      state.boardList.unshift(boardList);
     },
     setIsLoading: function setIsLoading(state, loading) {
       state.isLoading = loading;
+    },
+    setBoardDetail: function setBoardDetail(state, boardData) {
+      state.boardDetail = boardData;
+    },
+    setIsModalLoading: function setIsModalLoading(state, loading) {
+      state.isModalLoading = loading;
+    },
+    setControllFlg: function setControllFlg(state, flg) {
+      state.controllFlg = flg;
+    },
+    setLastPage: function setLastPage(state, page) {
+      state.lastPage = page;
+    },
+    setLastPageFlg: function setLastPageFlg(state, flg) {
+      state.lastPageFlg = flg;
     }
   },
   actions: {
@@ -23051,25 +23254,86 @@ __webpack_require__.r(__webpack_exports__);
      * 
      * @param {*} context
      */
-    getBoardListPagenation: function getBoardListPagenation(context) {
+    boardListPagenation: function boardListPagenation(context) {
+      if (!context.state.controllFlg) {
+        return;
+      }
+      if (context.state.lastPageFlg) {
+        return;
+      }
+      context.commit('setControllFlg', false);
       var url = '/api/boards?page=' + context.getters['getNextPage'];
       var config = {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
         }
       };
+      context.commit('setIsLoading', true);
       _js_axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, config).then(function (response) {
-        // 로딩 전
-        context.commit('setIsLoading', true);
-        console.log('loading : ' + context.state.isLoading);
-        context.commit('setBoardList', response.data.boardList.data);
         context.commit('setPage', response.data.boardList.current_page);
-
-        // 로딩 후
-        context.commit('setIsLoading', false);
-        console.log('loading : ' + context.state.isLoading);
+        context.commit('setBoardList', response.data.boardList.data);
+        if (response.data.boardList.current_page >= response.data.boardList.last_page) {
+          context.commit('setLastPageFlg', true);
+        }
       })["catch"](function (error) {
+        context.commit('setIsLoading', true);
         console.log(error.response);
+      })["finally"](function () {
+        context.commit('setControllFlg', true);
+        context.commit('setIsLoading', false);
+      });
+    },
+    /**
+     * 게시글 상세 정보 획득
+     * 
+     * @param {*} context 
+     * @param {*} id 
+     */
+    showBoard: function showBoard(context, id) {
+      var url = '/api/boards/' + id;
+      var config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+        }
+      };
+      context.commit('setIsModalLoading', true);
+      _js_axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, config).then(function (response) {
+        context.commit('setBoardDetail', response.data.board);
+        context.commit('setIsModalLoading', false);
+      })["catch"](function (error) {
+        context.commit('setIsModalLoding', true);
+        console.log(error.response);
+      });
+    },
+    /**
+     * 게시글 작성
+     * @param {*} context 
+     * @param {*} data 
+     */
+    storeBoard: function storeBoard(context, data) {
+      if (!context.state.controllFlg) return;
+      context.commit('setControllFlg', false);
+      var url = '/api/boards';
+      var config = {
+        headers: {
+          'Content-Type': 'multipart/form-data' // 파일을 삽입할 때만 json이 아닌 form-data 형식으로 보내는 거임
+          ,
+          'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+        }
+      };
+      var formData = new FormData();
+      formData.append('content', data.content);
+      formData.append('file', data.file);
+      _js_axios_js__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, formData, config).then(function (response) {
+        context.commit('setBoardListUnshift', response.data.board);
+        context.commit('user/setUserInfoBoardsCount', null, {
+          root: true
+        });
+        _js_router_js__WEBPACK_IMPORTED_MODULE_1__["default"].replace('/boards');
+      })["catch"](function (error) {
+        console.error(error.response);
+      })["finally"](function () {
+        context.commit('setControllFlg', true);
       });
     }
   },
@@ -23117,6 +23381,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     setUserInfo: function setUserInfo(state, userInfo) {
       state.userInfo = userInfo;
+    },
+    setUserInfoBoardsCount: function setUserInfoBoardsCount(state) {
+      state.userInfo.boards_count++;
+      localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
     }
   },
   actions: {
@@ -23306,7 +23574,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_css_boardList_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\t\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.loading-container {\r\n\t\tfont-size: 24px;\r\n\t\tdisplay: flex;\r\n\t\tjustify-content: center;\r\n\t\talign-items: center;\n}\nspan {\r\n\t\topacity: 0; /* 초기 상태에서 글자 안 보이게 */\r\n\t\ttransition: opacity 0.5s ease; /* 부드러운 애니메이션 효과 */\n}\n.fade-in {\r\n\t\topacity: 1; /* 보이는 상태 */\n}\n.fade-out {\r\n\t\topacity: 0; /* 사라지는 상태 */\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23357,7 +23625,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/* BoardList */\r\n.board-list-box {\r\n    display: grid;\r\n    grid-template-columns: repeat(2, minmax(100px, 1fr));\r\n    gap: 5px;\r\n}\r\n.board-list-box > .item {\r\n    display: flex;\r\n    align-items: center;\r\n    background-color: #000;\r\n    min-width: 100px;\r\n    min-height: 150px;\r\n}\r\n.board-list-box > .item > img {\r\n    width: 100%;\r\n}\r\n\r\n/* BoardDetail */\r\n.board-detail-box {\r\n    position: fixed;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    top: 0;\r\n    left: 0;\r\n    background-color: rgba(0, 0, 0, 0.7);\r\n    width: 100vw;\r\n    height: 100vh;\r\n}\r\n.board-detail-box > .item {\r\n    width: 70vw;\r\n    max-width: 700px;\r\n    background-color: #fff;\r\n    padding: 10px;\r\n}\r\n.board-detail-box > .item > img {\r\n    width: 100%;\r\n}\r\n.board-detail-box > .item > .etc-box {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "/* BoardList */\r\n.board-list{\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n}\r\n\r\n.board-list-box {\r\n    display: grid;\r\n    grid-template-columns: repeat(2, minmax(100px, 1fr));\r\n    gap: 5px;\r\n}\r\n.board-list-box > .item {\r\n    display: flex;\r\n    align-items: center;\r\n    background-color: #000;\r\n    min-width: 100px;\r\n    min-height: 150px;\r\n}\r\n.board-list-box > .item > img {\r\n    width: 100%;\r\n}\r\n\r\n/* BoardDetail */\r\n.board-detail-box {\r\n    position: fixed;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    top: 0;\r\n    left: 0;\r\n    background-color: rgba(0, 0, 0, 0.7);\r\n    width: 100vw;\r\n    height: 100vh;\r\n}\r\n.board-detail-box > .item {\r\n    width: 70vw;\r\n    max-width: 700px;\r\n    background-color: #fff;\r\n    padding: 10px;\r\n}\r\n.board-detail-box > .item > img {\r\n    width: 100%;\r\n}\r\n.board-detail-box > .item > .etc-box {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23485,21 +23753,6 @@ module.exports = function (cssWithMappingToString) {
 
   return list;
 };
-
-/***/ }),
-
-/***/ "./public/img/sample3.png":
-/*!********************************!*\
-  !*** ./public/img/sample3.png ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/sample3.png?499781bdabfd415d428da9f9cff1b2f6");
 
 /***/ }),
 
@@ -41445,12 +41698,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _BoardCreateComponent_vue_vue_type_template_id_766abf18__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BoardCreateComponent.vue?vue&type=template&id=766abf18 */ "./resources/views/components/board/BoardCreateComponent.vue?vue&type=template&id=766abf18");
-/* harmony import */ var _node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _BoardCreateComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BoardCreateComponent.vue?vue&type=script&setup=true&lang=js */ "./resources/views/components/board/BoardCreateComponent.vue?vue&type=script&setup=true&lang=js");
+/* harmony import */ var _node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
-const script = {}
+
+
 
 ;
-const __exports__ = /*#__PURE__*/(0,_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_1__["default"])(script, [['render',_BoardCreateComponent_vue_vue_type_template_id_766abf18__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/views/components/board/BoardCreateComponent.vue"]])
+const __exports__ = /*#__PURE__*/(0,_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BoardCreateComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BoardCreateComponent_vue_vue_type_template_id_766abf18__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/views/components/board/BoardCreateComponent.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -41589,6 +41844,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LoginComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LoginComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LoginComponent.vue?vue&type=script&setup=true&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/views/components/auth/LoginComponent.vue?vue&type=script&setup=true&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/views/components/board/BoardCreateComponent.vue?vue&type=script&setup=true&lang=js":
+/*!******************************************************************************************************!*\
+  !*** ./resources/views/components/board/BoardCreateComponent.vue?vue&type=script&setup=true&lang=js ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BoardCreateComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BoardCreateComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./BoardCreateComponent.vue?vue&type=script&setup=true&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/views/components/board/BoardCreateComponent.vue?vue&type=script&setup=true&lang=js");
  
 
 /***/ }),

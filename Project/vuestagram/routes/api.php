@@ -23,6 +23,13 @@ Route::middleware('my.auth')->group(function(){
 	// 로그아웃
 	Route::post('/logout', [AuthController::class, 'logout'])->name('post.logout');
 
+	// 게시글 =========================================
 	// 게시글 데이터 가져오기
-	Route::get('/boards', [BoardController::class, 'index'])->name('get.index');
+	Route::get('/boards', [BoardController::class, 'index'])->name('boards.index');
+
+	// 게시글 상세 데이터 가져오기
+	Route::get('/boards/{id}', [BoardController::class, 'show'])->name('boards.show');
+
+	// 게시글 작성하기
+	Route::post('/boards', [BoardController::class, 'store'])->name('boards.store');
 });
