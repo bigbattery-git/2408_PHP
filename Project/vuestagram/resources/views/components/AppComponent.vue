@@ -10,7 +10,7 @@
 				<div class="btn-group" >
 					<div v-if="!$store.state.user.authFlg">
 						<router-link to="/login"><button class="btn btn-header btn-bg-black">로그인</button></router-link>
-						<router-link to="/ragistration"><button class="btn btn-header btn-bg-white">회원가입</button></router-link>
+						<router-link to="/registration"><button class="btn btn-header btn-bg-white">회원가입</button></router-link>
 					</div>
 					<div v-else>
 						<button class="btn btn-header btn-bg-black" @click="$store.dispatch('user/logout')">로그아웃</button>

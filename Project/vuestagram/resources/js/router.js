@@ -52,7 +52,7 @@ const routes=[
 		,beforeEnter: chkAuth
 	}
 	,{
-		path:'/ragistration'
+		path:'/registration'
 		,component : UserRegistrationComponent
 		,beforeEnter: chkAuth
 	}

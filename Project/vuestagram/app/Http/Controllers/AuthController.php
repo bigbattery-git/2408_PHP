@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\MyAuthException;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
@@ -68,5 +69,38 @@ class AuthController extends Controller
 		];
 
 		return response()->json($response, 200);
+	}
+
+	/**
+	 * 토큰 재발급 처리
+	 * 
+	 * @param Illuminate\Http\Request $request
+	 * 
+	 * @return response Json
+	 */
+	public function reissue(Request $request){
+
+		// 특정 유저 찾기
+		$id = MyToken::getValueInPayload($request->bearerToken(), 'idt');
+
+		// 해당 유저의 정보 찾기
+		$userInfo = User::find($id);
+
+		if($request->bearerToken() !== $userInfo->refresh_token){
+			throw new MyAuthException('E22');
+		}
+
+		list($accessToken, $refreshToken) = MyToken::createTokens($userInfo);
+
+		MyToken::updateRefreshToken($userInfo, $refreshToken);
+
+		$responseData =[
+			'success' => true
+			,'msg' => '토큰 발급 성공임'
+			,'accessToken' => $accessToken
+			,'refreshToken' => $refreshToken
+		];
+
+		return response()->json($responseData, 200);
 	}
 }

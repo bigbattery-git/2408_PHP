@@ -109,6 +109,82 @@ export default {
 				context.commit('setUserInfo',{});
 				router.replace('/login');
 			});
+		},
+		/**
+		 * 회원가입
+		 */
+		registration(context, userInfo){
+			const url = '/api/registration';
+			const config = {
+				headers: {
+					'Content-Type' : 'multipart/form-data'
+				}
+			}
+
+			// form data 세팅
+			const formData = new FormData();
+			formData.append('account', userInfo.account);
+			formData.append('password', userInfo.password);
+			formData.append('password_chk', userInfo.password_chk);
+			formData.append('gender', userInfo.gender);
+			formData.append('profile', userInfo.profile);
+			formData.append('name', userInfo.name);
+
+			axios.post(url, formData, config)
+			.then(response => {
+				alert('회원가입 성공\n가입하신 계정으로 로그인 해 주세요.');
+				router.replace('/login');
+			}).catch(error => {
+				console.log(error.response);
+				alert('회원가입 실패');
+			});
+		},
+		/**
+		 * 
+		 * @param {*} context 
+		 * @param {function} callbackProcess 
+		 */
+		chkTokenAndContinueProcess(context, callbackProcess){
+			// 토큰 만료 확인
+			const payload = localStorage.getItem('accessToken').split('.')[1];
+			const base64 = payload.replace(/-/g, '+').replace(/_/g, '/'); // 정규식을 넣으면 전체가 다 바뀜
+			const objPayload = JSON.parse(window.atob(base64));
+			const now = new Date();
+			// 토큰 재발급 및 콜백함수 실행
+
+			if(objPayload.exp * 1000  > now.getTime()){
+				// 토근 유효
+				callbackProcess();
+			} else {
+				// 토큰 만료
+				context.dispatch('reissueAccessToken', callbackProcess);				
+			}
+		},
+		/**
+		 * 토큰 재발급 처리
+		 * @param {*} context 
+		 * @param {function} callbackProcess 
+		 */
+		reissueAccessToken(context, callbackProcess){
+			const url = '/api/reissue'
+			const config = {
+					headers: {
+							'Authorization' : 'Bearer ' + localStorage.getItem('refreshToken')
+					}
+			};
+			
+			axios.post(url, null, config)
+			.then(response => {
+				localStorage.setItem('accessToken', response.data.accessToken);	
+				localStorage.setItem('refreshToken', response.data.refreshToken);	
+				// 토큰 세팅
+				callbackProcess();
+			})
+			.catch(error => {
+					console.error(error);
+			});
+
+			// 재발급 처리 후 원래 하려던 처리 이어서 함
 		}
 	}
 	,getters: {

@@ -29,10 +29,10 @@ class MyToken{
 	 * @param App\models\User $userInfo 유저정보
 	 * @param string $refreshToken
 	 * 
-	 * @return bool true
+	 * @return bool true 
 	 */
 	public function updateRefreshToken(User $userInfo, string|null $refreshToken){
-		// 유저 모델의 리프래시 토큰 병경
+		// 유저 모델의 리프래시 토큰 변경
 		$userInfo->refresh_token = $refreshToken;
 
 		if(!($userInfo->save())){
